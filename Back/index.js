@@ -1,14 +1,13 @@
-const http = require('http');
-const hostname = '127.0.0.1';
-const port = 3000;
+const express = require('express');
+const app = express();
+const path = require('path');
+const router = express.Router();
 
-const server = http.createServer((req,res)=> {
-    res.statusCode =200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Ola vitao');
+
+router.get('/', function(req,res){
+    res.sendFile(path.join(__dirname+'/../Front/index.html'))
 });
 
 
-server.listen(port,hostname, ()=>{
-    console.log("servidor rodando");
-})
+app.use('/',router);
+app.listen(process.env.port || 3000);
