@@ -3,6 +3,10 @@ const app = express();
 const path = require('path');
 const router = express.Router();
 
+
+const sha256 = require('sha256'); //encriptar senha
+console.log(sha256('abc123'));
+
 const mysql = require('mysql');
 
 const con = mysql.createConnection({
@@ -29,10 +33,10 @@ router.get('/', function(req,res){
 app.use('/',router);
 app.listen(process.env.port || 3000);
 
-con.query('SELECT * FROM curso', (err, rows) => {
+con.query('SELECT * FROM associado where numero = 1', (err, rows) => {
     if (err) throw err
 
-    console.log('Authors: ', rows, '\n\n')
+    console.log(rows[0].senha_hash, '\n\n')
 })
 
 con.end((err) => {
