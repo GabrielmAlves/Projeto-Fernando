@@ -33,16 +33,17 @@ con.connect((err) => {
 });
 
 app.post('/login', async(req,res) => {
-    con.query('SELECT senha_hash FROM associado  WHERE email = "' + req.body.emailUser + '"', (err, rows) => {
+    con.query('SELECT * FROM associado  WHERE email = "' + req.body.emailUser + '"', (err, rows) => {
         if (err) throw err
     
-        let senhaHash = sha256(req.body.senhaUser)
-        let senhaBD = rows[0].senha_hash;
-        if(senhaBD)
+        if(rows[0] != undefined) {
+            let senhaHash = sha256(req.body.senhaUser)
+            let senhaBD = rows[0].senha_hash;
             if(senhaBD == senhaHash)
                 console.log('Entrou');
             else
                 console.log('Senha incorreta');
+        }
         else
             console.log('Este usuário não existe');
     })
