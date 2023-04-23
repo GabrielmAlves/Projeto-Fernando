@@ -10,8 +10,9 @@ import { CheckBox } from "react-native-btr";
 import React, { useState, useEffect } from "react";
 import config from "../../../config/config.json";
 import Icons from "react-native-vector-icons/FontAwesome";
+import CadastroCurriculo from "./CadastroCurriculo";
 
-export default function App() {
+export default function App({navigation}) {
   const [email, setEmail] = useState(null);
   const [senha, setSenha] = useState(null);
   const [hidePassword, setHidePassoword] = useState(true);
@@ -75,7 +76,11 @@ export default function App() {
           </View>
           <Text style={styles.esqueciSenha}>Esqueci minha senha!</Text>
         </View>
-        <Button title="Entrar" color="#FFA500" onPress={loginUser} />
+        <Button title="Entrar" color="#FFA500" onPress={(loginUser) => {
+          if(loginUser){
+            navigation.navigate("CadastroCurriculo");
+          }
+        }} />
       </View>
     </View>
   );

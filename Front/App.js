@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import Title from "./src/components/Title";
 import Form from "./src/components/Formulario";
+import CadastroCurriculo from "./CadastroCurriculo";
 
 export default function App() {
   return (
