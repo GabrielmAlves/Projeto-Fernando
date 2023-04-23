@@ -10,9 +10,18 @@ import { CheckBox } from "react-native-btr";
 import React, { useState, useEffect } from "react";
 import config from "../../../config/config.json";
 import Icons from "react-native-vector-icons/FontAwesome";
-import CadastroCurriculo from "./CadastroCurriculo";
+import CadastroCurriculo from "../../Screens/CadastroCurriculo";
+import { useNavigation } from "@react-navigation/native";
+import { CommonActions } from "@react-navigation/native"; 
 
-export default function App({navigation}) {
+export default function App() {
+
+  const navigation = useNavigation(); //vai fazer a navegação funcionar
+  const openCV = () =>{
+    navigation.dispatch(CommonActions.navigate({
+      name:"CadastroCurriculo"
+    })); 
+  }
   const [email, setEmail] = useState(null);
   const [senha, setSenha] = useState(null);
   const [hidePassword, setHidePassoword] = useState(true);
@@ -76,10 +85,11 @@ export default function App({navigation}) {
           </View>
           <Text style={styles.esqueciSenha}>Esqueci minha senha!</Text>
         </View>
-        <Button title="Entrar" color="#FFA500" onPress={(loginUser) => {
-          if(loginUser){
-            navigation.navigate("CadastroCurriculo");
-          }
+        <Button title="Entrar" color="#FFA500" onPress={() => {
+          //if(loginUser){
+           // navigation.navigate("CadastroCurriculo");
+          //}
+          openCV()
         }} />
       </View>
     </View>
