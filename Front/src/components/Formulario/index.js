@@ -1,24 +1,32 @@
-import { StyleSheet, Text, TextInput, View, Button } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  Button,
+  TouchableOpacity,
+} from "react-native";
 import { CheckBox } from "react-native-btr";
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from "react";
 import config from "../../../config/config.json";
+import Icons from "react-native-vector-icons/FontAwesome";
 
 export default function App() {
-
-  const [email,setEmail] = useState(null);
-  const [senha,setSenha] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [senha, setSenha] = useState(null);
+  const [hidePassword, setHidePassoword] = useState(true);
 
   async function loginUser() {
-    let req = await fetch(config.urlRootNode + 'login', {
-      method: 'POST',
+    let req = await fetch(config.urlRootNode + "login", {
+      method: "POST",
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         emailUser: email,
-        senhaUser: senha
-      })
+        senhaUser: senha,
+      }),
     });
   }
 
@@ -32,11 +40,27 @@ export default function App() {
           onChangeText={(text) => setEmail(text)}
         />
         <Text style={styles.formLabel}>Senha</Text>
-        <TextInput
-          style={styles.formInput}
-          placeholder="Preencha este campo com a sua senha"
-          onChangeText={(text) => setSenha(text)}
-        />
+        <View style={styles.passwordArea}>
+          <TextInput
+            style={styles.formPassword}
+            placeholder="Preencha este campo com a sua senha"
+            onChangeText={(text) => setSenha(text)}
+            secureTextEntry={hidePassword}
+          />
+          <TouchableOpacity
+            onPress={() => {
+              setHidePassoword(!hidePassword);
+            }}
+            style={styles.eyeIcon}
+          >
+            {hidePassword ? (
+              <Icons name="eye" color="#000" size={25} />
+            ) : (
+              <Icons name="eye-slash" color="#000" size={25} />
+            )}
+          </TouchableOpacity>
+        </View>
+
         {/* <Text style={styles.noShare}>
           Não compartilhe este campo com ninguém
         </Text> */}
@@ -51,7 +75,7 @@ export default function App() {
           </View>
           <Text style={styles.esqueciSenha}>Esqueci minha senha!</Text>
         </View>
-        <Button title="Entrar" color="#FFA500" onPress={loginUser}/>
+        <Button title="Entrar" color="#FFA500" onPress={loginUser} />
       </View>
     </View>
   );
@@ -103,5 +127,23 @@ const styles = StyleSheet.create({
   esqueciSenha: {
     color: "orange",
     marginBottom: 40,
+  },
+  passwordArea: {
+    flexDirection: "row",
+    width: "100%",
+    borderWidth: 1,
+    borderColor: "grey",
+    height: 45,
+    borderRadius: 5,
+    marginBottom: 5,
+    paddingLeft: 5,
+    alignItems: "center",
+  },
+  formPassword: {
+    width: "88%",
+  },
+  eyeIcon: {
+    width: "12%",
+    justifyContent: "center",
   },
 });
