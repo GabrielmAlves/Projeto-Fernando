@@ -39,26 +39,31 @@ app.post('/login', async(req,res) => {
         if(rows[0] != undefined) {
             let senhaHash = sha256(req.body.senhaUser)
             let senhaBD = rows[0].senha_hash;
-            if(senhaBD == senhaHash)
+            if(senhaBD == senhaHash) {
                 console.log('Entrou');
-            else
+                res.json({login: true});
+            }
+            else {
                 console.log('Senha incorreta');
+                res.json({login: false});
+            }    
         }
-        else
+        else {
             console.log('Este usuário não existe');
+            res.json({login: false});
+        }   
     })
 });
 
+// router.get('/', function(req,res){
+//     res.json("aaa");
+// });
+// app.use('/',router);
 
 app.listen(port, (req,res) => {
     console.log('Servidor rodando');
 });
 
-
-// router.get('/', function(req,res){
-//     res.sendFile(path.join(__dirname+'/../Front/index.html'))
-// });
-// app.use('/',router);
 
 
 
