@@ -1,10 +1,10 @@
 import {StyleSheet, Text, View} from "react-native";
-import Title from "../components/Title";
+import Title from "../components/FormCurriculo"
 
 export default function CadastroCurriculo() {
     return (
       <View style={styles.container}>
-        <Text>Batata doce é uma merda.</Text>
+        <Title/>
       </View>
     );
   }
