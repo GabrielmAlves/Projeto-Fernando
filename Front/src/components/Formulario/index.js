@@ -10,24 +10,39 @@ import { CheckBox } from "react-native-btr";
 import React, { useState, useEffect } from "react";
 import config from "../../../config/config.json";
 import Icons from "react-native-vector-icons/FontAwesome";
+import CadastroCurriculo from "../../Screens/CadastroCurriculo";
+import { useNavigation } from "@react-navigation/native";
+import { CommonActions } from "@react-navigation/native"; 
 
 export default function App() {
+
+  const navigation = useNavigation(); //vai fazer a navegação funcionar
   const [email, setEmail] = useState(null);
   const [senha, setSenha] = useState(null);
   const [hidePassword, setHidePassoword] = useState(true);
+  const [data, setData] = useState(null);
 
   async function loginUser() {
     let req = await fetch(config.urlRootNode + "login", {
       method: "POST",
       headers: {
-        Accept: "application/json",
+        "Accept": "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         emailUser: email,
         senhaUser: senha,
       }),
-    });
+    }).then((res) => res.json())
+    .then((data) => setData(data.login));
+  }
+
+  const openCV = () =>{
+    loginUser();
+    if(data)
+      navigation.dispatch(CommonActions.navigate({
+        name:"CadastroCurriculo"
+      })); 
   }
 
   return (
@@ -75,7 +90,7 @@ export default function App() {
           </View>
           <Text style={styles.esqueciSenha}>Esqueci minha senha!</Text>
         </View>
-        <Button title="Entrar" color="#FFA500" onPress={loginUser} />
+        <Button title="Entrar" color="#FFA500" onPress={openCV} />
       </View>
     </View>
   );
