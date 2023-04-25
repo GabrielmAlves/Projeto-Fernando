@@ -35,18 +35,15 @@ export default function App() {
       }),
     }).then((res) => res.json())
     .then((data) => setData(data.login));
-    
-
-    console.log(data);
-    if(data) {
-      openCV();
-    }
   }
 
-  const openCV = () =>{
-      navigation.dispatch(CommonActions.navigate({
-        name:"CadastroCurriculo"
-      })); 
+  if(data) {
+    setData(null);
+    setEmail(null);
+    setSenha(null);
+    navigation.dispatch(CommonActions.navigate({
+      name:"CadastroCurriculo"
+    }));
   }
 
   return (

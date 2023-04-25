@@ -2,6 +2,7 @@ import {
   View, Text, StyleSheet, TextInput, Button
 } from "react-native";
 import React, { useState, useEffect } from "react";
+import config from "../../../config/config.json";
 
 
 export default function App() {
@@ -9,8 +10,24 @@ export default function App() {
   const [empresas, setEmpresas] = useState("");
   const [cursos, setCursos] = useState("");
   const [cargos, setCargos] = useState("");
+  const [data, setData] = useState(null);
 
-
+  async function createCV() {
+    let req = await fetch(config.urlRootNode + "create", {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        instituicaoUser: instituicao,
+        empresasUser: empresas,
+        cursosUser: cursos,
+        cargosUser: cargos,
+      }),
+    });
+    
+  }
 
   return (
     <View style={styles.container}>
@@ -48,12 +65,7 @@ export default function App() {
         value={cargos}
       />
 
-      <Button title="Salvar" onPress={() => {
-        console.log(`Instituição de Ensino: ${instituicao}`);
-        console.log(`Empresas Trabalhadas: ${empresas}`);
-        console.log(`Cursos Extras: ${cursos}`);
-        console.log(`Cargos Ocupados: ${cargos}`);
-      }} />
+      <Button title="Salvar" onPress={createCV} />
     </View>
   );
 }

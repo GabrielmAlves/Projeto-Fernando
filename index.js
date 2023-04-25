@@ -55,6 +55,12 @@ app.post('/login', async(req,res) => {
     })
 });
 
+app.post('/create', async(req,res) => {
+
+    console.log(req.body.instituicaoUser);
+});
+
+
 // router.get('/', function(req,res){
 //     res.json("aaa");
 // });
