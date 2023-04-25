@@ -35,11 +35,15 @@ export default function App() {
       }),
     }).then((res) => res.json())
     .then((data) => setData(data.login));
+    
+
+    console.log(data);
+    if(data) {
+      openCV();
+    }
   }
 
   const openCV = () =>{
-    loginUser();
-    if(data)
       navigation.dispatch(CommonActions.navigate({
         name:"CadastroCurriculo"
       })); 
@@ -90,7 +94,7 @@ export default function App() {
           </View>
           <Text style={styles.esqueciSenha}>Esqueci minha senha!</Text>
         </View>
-        <Button title="Entrar" color="#FFA500" onPress={openCV} />
+        <Button title="Entrar" color="#FFA500" onPress={loginUser} />
       </View>
     </View>
   );

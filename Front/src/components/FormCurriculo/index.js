@@ -1,143 +1,88 @@
 import {
-    StyleSheet,
-    Text,
-    TextInput,
-    View,
-    Button,
-    TouchableOpacity,
-  } from "react-native";
-  import { CheckBox } from "react-native-btr";
-  import React, { useState, useEffect } from "react";
-  import config from "../../../config/config.json";
-  import Icons from "react-native-vector-icons/FontAwesome";
-  import CadastroCurriculo from "./CadastroCurriculo";
-  
-  export default function App({navigation}) {
-    const [email, setEmail] = useState(null);
-    const [senha, setSenha] = useState(null);
-    const [hidePassword, setHidePassoword] = useState(true);
-  
-    
-  
-    return (
-      <View style={styles.formContainer}>
-        <View style={styles.form}>
-          <Text style={styles.formLabel}>Email</Text>
-          <TextInput
-            style={styles.formInput}
-            placeholder="Preencha este campo com o seu e-mail"
-            onChangeText={(text) => setEmail(text)}
-          />
-          <Text style={styles.formLabel}>Senha</Text>
-          <View style={styles.passwordArea}>
-            <TextInput
-              style={styles.formPassword}
-              placeholder="Preencha este campo com a sua senha"
-              onChangeText={(text) => setSenha(text)}
-              secureTextEntry={hidePassword}
-            />
-            <TouchableOpacity
-              onPress={() => {
-                setHidePassoword(!hidePassword);
-              }}
-              style={styles.eyeIcon}
-            >
-              {hidePassword ? (
-                <Icons name="eye" color="#000" size={25} />
-              ) : (
-                <Icons name="eye-slash" color="#000" size={25} />
-              )}
-            </TouchableOpacity>
-          </View>
-  
-          {/* <Text style={styles.noShare}>
-            Não compartilhe este campo com ninguém
-          </Text> */}
-          <Text style={styles.semConta}>
-            Sem conta? Entre em contato com o órgão responsável
-          </Text>
-  
-          <View style={styles.containerEsqueciSenha}>
-            <View style={styles.habilitarContainer}>
-              <CheckBox />
-              <Text style={styles.textHabilitar}>Habilitar Leitor</Text>
-            </View>
-            <Text style={styles.esqueciSenha}>Esqueci minha senha!</Text>
-          </View>
-          <Button title="Entrar" color="#FFA500" onPress={(loginUser) => {
-            if(loginUser){
-              //navigation.navigate("CadastroCurriculo");
-            }
-          }} />
-        </View>
-      </View>
-    );
-  }
-  
-  const styles = StyleSheet.create({
-    formContainer: {
-      width: "100%",
-      height: "100%",
-      alignItems: "center",
-      marginTop: 20,
-      padding: 5,
-    },
-    formLabel: {
-      fontSize: 15,
-    },
-    formInput: {
-      width: "100%",
-      borderWidth: 1,
-      borderColor: "grey",
-      height: 45,
-      borderRadius: 5,
-      marginBottom: 5,
-      paddingLeft: 5,
-    },
-    form: {
-      width: "100%",
-      height: "auto",
-      padding: 10,
-    },
-    semConta: {
-      marginBottom: 20,
-      marginTop: 10,
-    },
-    noShare: {
-      fontWeight: "bold",
-      marginBottom: 10,
-    },
-    containerEsqueciSenha: {
-      flexDirection: "row",
-      columnGap: 80,
-    },
-    habilitarContainer: {
-      flexDirection: "row",
-      columnGap: 3,
-      marginBottom: 10,
-      height: 20,
-    },
-    esqueciSenha: {
-      color: "orange",
-      marginBottom: 40,
-    },
-    passwordArea: {
-      flexDirection: "row",
-      width: "100%",
-      borderWidth: 1,
-      borderColor: "grey",
-      height: 45,
-      borderRadius: 5,
-      marginBottom: 5,
-      paddingLeft: 5,
-      alignItems: "center",
-    },
-    formPassword: {
-      width: "88%",
-    },
-    eyeIcon: {
-      width: "12%",
-      justifyContent: "center",
-    },
-  });
-  
+  View, Text, StyleSheet, TextInput, Button
+} from "react-native";
+import React, { useState, useEffect } from "react";
+
+
+export default function App() {
+  const [instituicao, setInstituicao] = useState("");
+  const [empresas, setEmpresas] = useState("");
+  const [cursos, setCursos] = useState("");
+  const [cargos, setCargos] = useState("");
+
+
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Currículo</Text>
+
+      <Text style={styles.label}>Instituição de Ensino</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Digite o nome da sua instituição de ensino"
+        onChangeText={setInstituicao}
+        value={instituicao}
+      />
+
+      <Text style={styles.label}>Empresas Trabalhadas</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Digite o nome das empresas em que trabalhou"
+        onChangeText={setEmpresas}
+        value={empresas}
+      />
+
+      <Text style={styles.label}>Cursos Extras</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Digite o nome dos cursos extras que fez"
+        onChangeText={setCursos}
+        value={cursos}
+      />
+
+      <Text style={styles.label}>Cargos Ocupados</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Digite os cargos que ocupou"
+        onChangeText={setCargos}
+        value={cargos}
+      />
+
+      <Button title="Salvar" onPress={() => {
+        console.log(`Instituição de Ensino: ${instituicao}`);
+        console.log(`Empresas Trabalhadas: ${empresas}`);
+        console.log(`Cursos Extras: ${cursos}`);
+        console.log(`Cargos Ocupados: ${cargos}`);
+      }} />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#FFF",
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 16,
+  },
+  label: {
+    fontSize: 16,
+    fontWeight: "bold",
+    marginTop: 16,
+  },
+  input: {
+    width: "90%",
+    height: 40,
+    borderColor: "gray",
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingHorizontal: 8,
+    marginTop: 8,
+    marginBottom: 16,
+  },
+});
