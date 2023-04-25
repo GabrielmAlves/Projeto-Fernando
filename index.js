@@ -33,7 +33,7 @@ con.connect((err) => {
 });
 
 app.post('/login', async(req,res) => {
-    con.query('SELECT * FROM associado  WHERE email = "' + req.body.emailUser + '"', (err, rows) => {
+    con.query('SELECT * FROM associado  WHERE email = ?', [req.body.emailUser], (err, rows) => {
         if (err) throw err
     
         if(rows[0] != undefined) {
