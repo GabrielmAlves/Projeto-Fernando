@@ -32,6 +32,8 @@ con.connect((err) => {
     console.log('Connection established!')
 });
 
+var idUser;
+
 app.post('/login', async(req,res) => {
     con.query('SELECT * FROM associado  WHERE email = ?', [req.body.emailUser], (err, rows) => {
         if (err) throw err
@@ -40,7 +42,8 @@ app.post('/login', async(req,res) => {
             let senhaHash = sha256(req.body.senhaUser)
             let senhaBD = rows[0].senha_hash;
             if(senhaBD == senhaHash) {
-                console.log('Entrou');
+                console.log('Entrou ');
+                // idUser = rows[0].id;
                 res.json({login: true});
             }
             else {
@@ -56,8 +59,19 @@ app.post('/login', async(req,res) => {
 });
 
 app.post('/create', async(req,res) => {
+    let inst = req.body.instituicaoUser;
+    let curso = req.body.cursosUser;
+    let emp = req.body.empresasUser;
+    let cargo = req.body.cargosUser;
+    // let id = idUser;
 
-    console.log(req.body.instituicaoUser);
+    con.query('INSERT INTO curriculo(associado_id, instituicao_ensino, curso_extra, empresa_trabalhada, cargo_ocupado) VALUES (?, ?, ?, ?)',
+    [inst,curso,emp,cargo], (err, rows) => {
+        if (err) throw err
+
+        console.log('Currículo cadastrado com sucesso');
+        
+    })
 });
 
 

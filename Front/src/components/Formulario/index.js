@@ -39,8 +39,6 @@ export default function App() {
 
   if(data) {
     setData(null);
-    setEmail(null);
-    setSenha(null);
     navigation.dispatch(CommonActions.navigate({
       name:"CadastroCurriculo"
     }));
