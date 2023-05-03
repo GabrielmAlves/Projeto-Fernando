@@ -5,6 +5,7 @@ import CadastroCurriculo from "./src/Screens/CadastroCurriculo";
 import { NavigationContainer, StackRouter } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import TelaLogin from "./src/Screens/tela_login";
+import Home from "./src/Screens/Home";
 
 
 const stack = createNativeStackNavigator();
@@ -15,10 +16,13 @@ export default function App() {
       <stack.Navigator initialRouteName="tela_login">
         <stack.Screen
         name="tela_login" component={TelaLogin}/>
-         <stack.Screen
+          <stack.Screen
+        name="Home" component={Home}/>
+        <stack.Screen
         name="CadastroCurriculo" component={CadastroCurriculo}/>
          
       </stack.Navigator>
+      
    </NavigationContainer>
   );
 }

@@ -40,8 +40,9 @@ export default function App() {
   if(data) {
     setData(null);
     navigation.dispatch(CommonActions.navigate({
-      name:"CadastroCurriculo"
+      name:"Home"
     }));
+    
   }
 
   return (

@@ -43,7 +43,7 @@ app.post('/login', async(req,res) => {
             let senhaBD = rows[0].senha_hash;
             if(senhaBD == senhaHash) {
                 console.log('Entrou ');
-                // idUser = rows[0].id;
+                idUser = rows[0].id;
                 res.json({login: true});
             }
             else {
@@ -63,9 +63,10 @@ app.post('/create', async(req,res) => {
     let curso = req.body.cursosUser;
     let emp = req.body.empresasUser;
     let cargo = req.body.cargosUser;
-    // let id = idUser;
 
-    con.query('INSERT INTO curriculo(associado_id, instituicao_ensino, curso_extra, empresa_trabalhada, cargo_ocupado) VALUES (?, ?, ?, ?)',
+    console.log(idUser);
+
+    con.query('INSERT INTO curriculo(instituicao_ensino, curso_extra, empresa_trabalhada, cargo_ocupado) VALUES (?, ?, ?, ?)',
     [inst,curso,emp,cargo], (err, rows) => {
         if (err) throw err
 
@@ -74,11 +75,33 @@ app.post('/create', async(req,res) => {
     })
 });
 
+app.post('/edit', async(req,res) => {
+    let inst = req.body.instituicaoUser;
+    let curso = req.body.cursosUser;
+    let emp = req.body.empresasUser;
+    let cargo = req.body.cargosUser;
+    // let id = idUser;
 
-// router.get('/', function(req,res){
-//     res.json("aaa");
-// });
-// app.use('/',router);
+    con.query('UPDATE curriculo SET instituicao_ensino = ?, curso_extra = ?, empresa_trabalhada = ?, cargo_ocupado = ? WHERE associado_id = ?',
+    [inst,curso,emp,cargo], (err, rows) => {
+        if (err) throw err
+
+        console.log('Currículo atualizado com sucesso');
+        
+    })
+});
+
+app.post('/delete', async(req,res) => {
+    // let id = idUser;
+
+    con.query('DELETE FROM curriculo WHERE associado_id = ?',
+    [inst,curso,emp,cargo], (err, rows) => {
+        if (err) throw err
+
+        console.log('Currículo deletado com sucesso');
+        
+    })
+});
 
 app.listen(port, (req,res) => {
     console.log('Servidor rodando');
