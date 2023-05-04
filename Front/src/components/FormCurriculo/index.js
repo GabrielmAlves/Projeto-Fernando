@@ -12,11 +12,11 @@ export default function App() {
   const [cargos, setCargos] = useState("");
   const [data, setData] = useState(null);
 
-  fetch(config.urlRootNode + "curriculo").then((res) => res.json())
-    .then((json) => setInstituicao(json.instituicao))
-  fetch(config.urlRootNode + "curriculo").then((res) => res.json()).then((json) => setEmpresas(json.empresas))
-  fetch(config.urlRootNode + "curriculo").then((res) => res.json()).then((json) => setCursos(json.cursos))
-  fetch(config.urlRootNode + "curriculo").then((res) => res.json()).then((json) => setCargos(json.cargos))
+  // fetch(config.urlRootNode + "curriculo").then((res) => res.json())
+  //   .then((json) => setInstituicao(json.instituicao))
+  // fetch(config.urlRootNode + "curriculo").then((res) => res.json()).then((json) => setEmpresas(json.empresas))
+  // fetch(config.urlRootNode + "curriculo").then((res) => res.json()).then((json) => setCursos(json.cursos))
+  // fetch(config.urlRootNode + "curriculo").then((res) => res.json()).then((json) => setCargos(json.cargos))
 
   
   async function createCV() {
@@ -36,7 +36,19 @@ export default function App() {
   }
 
   async function eraseCV(){
-    let req = await fetch(config.urlRootNode + "delete")
+    let req = await fetch(config.urlRootNode + "delete",  {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        instituicaoUser: instituicao,
+        empresasUser: empresas,
+        cursosUser: cursos,
+        cargosUser: cargos,
+      }),
+    });
     setInstituicao("");
     setCargos("");
     setCursos("");
