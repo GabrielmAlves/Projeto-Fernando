@@ -29,6 +29,22 @@ export default function App() {
     
   }
 
+  async function eraseCV(){
+    let req = await fetch(config.urlRootNode + "erase", {
+    method= "POST",
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+        instituicaoUser: null,
+        empresasUser: null,
+        cursosUser: null,
+        cargosUser: null,
+    })
+    })
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Currículo</Text>
@@ -65,7 +81,9 @@ export default function App() {
         value={cargos}
       />
 
-      <Button title="Salvar" onPress={createCV} />
+      <Button title="Deletar" style={styles.delete} onPress={eraseCV} />
+      <Button title="Salvar" style={styles.save} onPress={createCV} />
+
     </View>
   );
 }
@@ -97,4 +115,20 @@ const styles = StyleSheet.create({
     marginTop: 8,
     marginBottom: 16,
   },
+
+  save: {
+    fontSize: 16,
+    marginTop: 16,
+    color: "green",
+    borderRadius: 8,
+    width:"30%",
+  }
+
+  delete: {
+    fontSize: 16,
+    marginTop: 16,
+    color: "red",
+    borderRadius: 8,
+    width:"30%",
+  }
 });
