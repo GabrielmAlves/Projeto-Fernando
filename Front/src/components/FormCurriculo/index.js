@@ -31,7 +31,7 @@ export default function App() {
 
   async function eraseCV(){
     let req = await fetch(config.urlRootNode + "erase", {
-    method : "POST",
+    method= "POST",
     headers: {
       "Accept": "application/json",
       "Content-Type": "application/json",
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     color: "green",
     borderRadius: 8,
     width:"30%",
-  },
+  }
 
   delete: {
     fontSize: 16,
