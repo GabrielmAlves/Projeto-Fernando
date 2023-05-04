@@ -1,5 +1,5 @@
 import {
-  View, Text, StyleSheet, TextInput, Button
+  View, Text, StyleSheet, TextInput, Button, TouchableOpacity
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import config from "../../../config/config.json";
@@ -58,41 +58,61 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Currículo</Text>
-
-      <Text style={styles.label}>Instituição de Ensino</Text>
+    
+    <View>
+    <Text style={styles.label}>Instituição de Ensino</Text>
       <TextInput
         style={styles.input}
         placeholder="Digite o nome da sua instituição de ensino"
         onChangeText={setInstituicao}
         value={instituicao}
       />
+    </View>
 
-      <Text style={styles.label}>Empresas Trabalhadas</Text>
+    <View>
+    <Text style={styles.label}>Empresas Trabalhadas</Text>
       <TextInput
         style={styles.input}
         placeholder="Digite o nome das empresas em que trabalhou"
         onChangeText={setEmpresas}
         value={empresas}
       />
+    </View>
 
-      <Text style={styles.label}>Cursos Extras</Text>
+    <View>
+    <Text style={styles.label}>Cursos Extras</Text>
       <TextInput
         style={styles.input}
         placeholder="Digite o nome dos cursos extras que fez"
         onChangeText={setCursos}
         value={cursos}
       />
+    </View>
 
-      <Text style={styles.label}>Cargos Ocupados</Text>
+    <View>
+    <Text style={styles.label}>Cargos Ocupados</Text>
       <TextInput
         style={styles.input}
         placeholder="Digite os cargos que ocupou"
         onChangeText={setCargos}
         value={cargos}
       />
+    </View>
 
-      <Button title="Deletar" style={styles.delete} onPress={eraseCV} />
-      <Button title="Salvar" style={styles.save} onPress={createCV} />
+    <View style= {styles.viewButtons}>
+
+    <TouchableOpacity style={styles.update} onPress={eraseCV} >
+        <Text style={styles.textUpdate}>Atualizar</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.delete} onPress={eraseCV} >
+        <Text style={styles.textDelete}>Deletar</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.save} onPress={createCV} >
+        <Text style={styles.textSave}>Salvar</Text>
+      </TouchableOpacity>
+    </View>
 
     </View>
   );
@@ -101,44 +121,70 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     backgroundColor: "#FFF",
+    paddingTop: 30, 
+    rowGap: 10,
   },
   title: {
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 16,
+    textAlign: "center",
+    
   },
   label: {
-    fontSize: 16,
-    fontWeight: "bold",
+    fontSize: 12.5,
     marginTop: 16,
   },
   input: {
-    width: "90%",
-    height: 40,
-    borderColor: "gray",
+    borderRadius: 10,
     borderWidth: 1,
-    borderRadius: 8,
-    paddingHorizontal: 8,
-    marginTop: 8,
-    marginBottom: 16,
+    borderColor: "grey",
+    padding: 7,
+    height: 52,
   },
 
   save: {
-    fontSize: 16,
-    marginTop: 16,
-    color: "green",
+    backgroundColor: "#09E020",
+    padding: 8,
     borderRadius: 8,
-    width:"30%",
+    width:"28%",
   },
 
   delete: {
-    fontSize: 16,
-    marginTop: 16,
-    color: "red",
+    backgroundColor: "#FA0303",
     borderRadius: 8,
-    width:"30%",
+    width:"28%",
+    padding: 8,
+  },
+
+  update: {
+    backgroundColor: "#0286FA",
+    borderRadius: 8,
+    width:"28%",
+    padding: 8,
+  },
+
+  textUpdate: {
+    color: "#FFF",
+    textAlign: "center",
+  },
+
+  textDelete: {
+    color: "#FFF",
+    textAlign: "center",
+  },
+
+  textSave: {
+    color: "#FFF",
+    textAlign: "center",
+  },
+
+  viewButtons: {
+    flexDirection: "row",
+    columnGap: 10,
+    marginTop: 40,
+    justifyContent: "space-between",
   }
 });

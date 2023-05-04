@@ -13,12 +13,12 @@ const stack = createNativeStackNavigator();
  function MyStack() {
   return (
       <stack.Navigator>
-        <stack.Screen
+        <stack.Screen options = {{headerTransparent: false}}
         name="Login" component={Login}/>
           <stack.Screen
         name="Home" component={Home}/>
         <stack.Screen
-        name="CadastroCurriculo" component={CadastroCurriculo}/>
+        name="CadastroCurriculo" options = {{headerTransparent: false}} component={CadastroCurriculo}/>
          
       </stack.Navigator>
       
