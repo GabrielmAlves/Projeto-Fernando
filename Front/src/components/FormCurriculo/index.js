@@ -12,6 +12,13 @@ export default function App() {
   const [cargos, setCargos] = useState("");
   const [data, setData] = useState(null);
 
+  fetch(config.urlRootNode + "curriculo").then((res) => res.json())
+    .then((json) => setInstituicao(json.instituicao))
+  fetch(config.urlRootNode + "curriculo").then((res) => res.json()).then((json) => setEmpresas(json.empresas))
+  fetch(config.urlRootNode + "curriculo").then((res) => res.json()).then((json) => setCursos(json.cursos))
+  fetch(config.urlRootNode + "curriculo").then((res) => res.json()).then((json) => setCargos(json.cargos))
+
+  
   async function createCV() {
     let req = await fetch(config.urlRootNode + "create", {
       method: "POST",
@@ -26,23 +33,14 @@ export default function App() {
         cargosUser: cargos,
       }),
     });
-    
   }
 
   async function eraseCV(){
-    let req = await fetch(config.urlRootNode + "erase", {
-    method= "POST",
-    headers: {
-      "Accept": "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-        instituicaoUser: null,
-        empresasUser: null,
-        cursosUser: null,
-        cargosUser: null,
-    })
-    })
+    let req = await fetch(config.urlRootNode + "delete")
+    setInstituicao("");
+    setCargos("");
+    setCursos("");
+    setEmpresas("");
   }
 
   return (
@@ -122,7 +120,7 @@ const styles = StyleSheet.create({
     color: "green",
     borderRadius: 8,
     width:"30%",
-  }
+  },
 
   delete: {
     fontSize: 16,
