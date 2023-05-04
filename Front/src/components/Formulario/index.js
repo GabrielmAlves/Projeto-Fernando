@@ -10,7 +10,6 @@ import { CheckBox } from "react-native-btr";
 import React, { useState, useEffect } from "react";
 import config from "../../../config/config.json";
 import Icons from "react-native-vector-icons/FontAwesome";
-import CadastroCurriculo from "../../Screens/CadastroCurriculo";
 import { useNavigation } from "@react-navigation/native";
 import { CommonActions } from "@react-navigation/native"; 
 
@@ -40,7 +39,7 @@ export default function App() {
   if(data) {
     setData(null);
     navigation.dispatch(CommonActions.navigate({
-      name:"CadastroCurriculo"
+      name:"Home"
     }));
     
   }

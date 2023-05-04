@@ -1,4 +1,4 @@
-zimport { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import Title from "../components/Title";
 import Form from "../components/Formulario";
 

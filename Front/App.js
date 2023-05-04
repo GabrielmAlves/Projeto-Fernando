@@ -4,18 +4,17 @@ import Form from "./src/components/Formulario";
 import CadastroCurriculo from "./src/Screens/CadastroCurriculo";
 import { NavigationContainer, StackRouter } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import TelaLogin from "./src/Screens/tela_login";
+import Login from "./src/Screens/Login";
 import Home from "./src/Screens/Home";
 
 
 const stack = createNativeStackNavigator();
 
-export default function App() {
+ function MyStack() {
   return (
-   <NavigationContainer>
-      <stack.Navigator initialRouteName="tela_login">
+      <stack.Navigator>
         <stack.Screen
-        name="tela_login" component={TelaLogin}/>
+        name="Login" component={Login}/>
           <stack.Screen
         name="Home" component={Home}/>
         <stack.Screen
@@ -23,15 +22,14 @@ export default function App() {
          
       </stack.Navigator>
       
-   </NavigationContainer>
+  
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "flex-start",
-  },
-});
+export default function App(){
+  return(
+<NavigationContainer>
+  <MyStack/>
+</NavigationContainer>
+  )
+}

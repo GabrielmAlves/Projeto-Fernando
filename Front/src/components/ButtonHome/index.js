@@ -15,14 +15,13 @@ import {
   export default function App(props) {
   
     const navigation = useNavigation(); //vai fazer a navegação funcionar
-    function navegateTo (screen){
-      navigation.dispatch(CommonActions.navigate({
-          name:screen
-        }));
-  }
+   
+  
   
     return (
-      <TouchableOpacity style={styles.containerHome} onPress={navegateTo(props.screen)}>
+      <TouchableOpacity style={styles.containerHome} onPress={()=>{
+        navigation.navigate(props.screen)
+      }}>
         <Icons name={props.icon} size={60} color={"#FFF"}/>
         <Text style={styles.text}>{props.text}</Text>
       </TouchableOpacity>
