@@ -12,6 +12,7 @@ import config from "../../../config/config.json";
 import Icons from "react-native-vector-icons/FontAwesome";
 import { useNavigation } from "@react-navigation/native";
 import { CommonActions } from "@react-navigation/native"; 
+import Forget from "./src/components/ButtonEsqueciSenha";
 
 export default function App() {
 
@@ -91,7 +92,9 @@ export default function App() {
             <CheckBox />
             <Text style={styles.textHabilitar}>Habilitar Leitor</Text>
           </View>
-          <Text style={styles.esqueciSenha}>Esqueci minha senha!</Text>
+           <Text style={styles.esqueciSenha}>Esqueci minha senha!</Text> 
+          {/* <TouchableOpacity style={styles.esqueciSenha} screen="Forget">Esqueci minha senha!</TouchableOpacity> */}
+          <Forget />
         </View>
         <Button title="Entrar" color="#FFA500" onPress={loginUser} />
       </View>

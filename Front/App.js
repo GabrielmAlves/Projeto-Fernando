@@ -11,6 +11,7 @@ import Eventos from "./src/Screens/Eventos";
 import Jogos from "./src/Screens/Jogos";
 import Vagas from "./src/Screens/Vagas";
 import VideoAulas from "./src/Screens/Videoaulas";
+import EsqueciSenha from "./src/components/EsqueciSenha";
 
 const stack = createNativeStackNavigator();
 
