@@ -94,7 +94,8 @@ export default function App() {
           </View>
            <Text style={styles.esqueciSenha}>Esqueci minha senha!</Text> 
           {/* <TouchableOpacity style={styles.esqueciSenha} screen="Forget">Esqueci minha senha!</TouchableOpacity> */}
-          <Forget />
+          {/* <Forget /> */}
+          <ButtonHome text="Eventos" icon="group" screen="EsqueciSenha"></ButtonHome>
         </View>
         <Button title="Entrar" color="#FFA500" onPress={loginUser} />
       </View>
