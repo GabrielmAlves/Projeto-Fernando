@@ -1,5 +1,4 @@
 import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
-import { CheckBox } from "react-native-btr";
 import React, { useState, useEffect } from "react";
 import Icons from "react-native-vector-icons/FontAwesome";
 import { useNavigation } from "@react-navigation/native";
@@ -10,12 +9,11 @@ export default function App(props) {
 
   return (
     <TouchableOpacity
-      style={styles.containerHome}
       onPress={() => {
         navigation.navigate(props.screen);
       }}
     >
-      
+      <Text style={styles.esqueciSenha}>Esqueci minha senha!</Text>
     </TouchableOpacity>
   );
 }
@@ -35,5 +33,9 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 12,
     color: "#FFF",
+  },
+  esqueciSenha: {
+    color: "orange",
+    marginBottom: 40,
   },
 });

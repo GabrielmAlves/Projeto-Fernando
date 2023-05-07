@@ -11,11 +11,9 @@ import React, { useState, useEffect } from "react";
 import config from "../../../config/config.json";
 import Icons from "react-native-vector-icons/FontAwesome";
 import { useNavigation } from "@react-navigation/native";
-import { CommonActions } from "@react-navigation/native"; 
-import Forget from "./src/components/ButtonEsqueciSenha";
-
+import { CommonActions } from "@react-navigation/native";
+import ButtonEsqueciSenha from "../ButtonEsqueciSenha";
 export default function App() {
-
   const navigation = useNavigation(); //vai fazer a navegação funcionar
   const [email, setEmail] = useState(null);
   const [senha, setSenha] = useState(null);
@@ -26,27 +24,31 @@ export default function App() {
     // let req = await fetch(config.urlRootNode + "login", {
     //   method: "POST",
     //   headers: {
-    //     "Accept": "application/json",
+    //     Accept: "application/json",
     //     "Content-Type": "application/json",
     //   },
     //   body: JSON.stringify({
     //     emailUser: email,
     //     senhaUser: senha,
     //   }),
-    // }).then((res) => res.json())
-    // .then((data) => setData(data.login));
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => setData(data.login));
 
-    navigation.dispatch(CommonActions.navigate({
-      name:"Home"
-    }));
+    navigation.dispatch(
+      CommonActions.navigate({
+        name: "Home",
+      })
+    );
   }
 
-  // if(data) {
+  // if (data) {
   //   setData(null);
-  //   navigation.dispatch(CommonActions.navigate({
-  //     name:"Home"
-  //   }));
-    
+  //   navigation.dispatch(
+  //     CommonActions.navigate({
+  //       name: "Home",
+  //     })
+  //   );
   // }
 
   return (
@@ -83,16 +85,11 @@ export default function App() {
         {/* <Text style={styles.noShare}>
           Não compartilhe este campo com ninguém
         </Text> */}
-        <Text style={styles.semConta}>
+        {/* <Text style={styles.semConta}>
           Sem conta? Entre em contato com o órgão responsável
-        </Text>
+        </Text> */}
 
         <View style={styles.containerEsqueciSenha}>
-          <View style={styles.habilitarContainer}>
-            <CheckBox />
-            <Text style={styles.textHabilitar}>Habilitar Leitor</Text>
-          </View>
-           <Text style={styles.esqueciSenha}>Esqueci minha senha!</Text> 
           {/* <TouchableOpacity style={styles.esqueciSenha} screen="Forget">Esqueci minha senha!</TouchableOpacity> */}
           {/* <Forget /> */}
           <ButtonEsqueciSenha screen="EsqueciSenha"></ButtonEsqueciSenha>
@@ -138,7 +135,7 @@ const styles = StyleSheet.create({
   },
   containerEsqueciSenha: {
     flexDirection: "row",
-    columnGap: 80,
+    paddingVertical: 10,
   },
   habilitarContainer: {
     flexDirection: "row",
@@ -146,10 +143,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     height: 20,
   },
-  esqueciSenha: {
-    color: "orange",
-    marginBottom: 40,
-  },
+
   passwordArea: {
     flexDirection: "row",
     width: "100%",

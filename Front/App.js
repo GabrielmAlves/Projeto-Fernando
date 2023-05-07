@@ -11,22 +11,58 @@ import Eventos from "./src/Screens/Eventos";
 import Jogos from "./src/Screens/Jogos";
 import Vagas from "./src/Screens/Vagas";
 import VideoAulas from "./src/Screens/Videoaulas";
-import EsqueciSenha from "./src/components/EsqueciSenha";
+import EsqueciSenha from "./src/Screens/EsqueciSenha";
 
 const stack = createNativeStackNavigator();
 
 function MyStack() {
   return (
     <stack.Navigator>
-      <stack.Screen name="Login" component={Login} />
-      <stack.Screen name="EsqueciSenha" component={EsqueciSenha} />
-      <stack.Screen name="Home" component={Home} />
-      <stack.Screen name="CadastroCurriculo" component={CadastroCurriculo} />
-      <stack.Screen name="Cursos" component={Cursos} />
-      <stack.Screen name="Eventos" component={Eventos} />
-      <stack.Screen name="Jogos" component={Jogos} />
-      <stack.Screen name="Vagas" component={Vagas} />
-      <stack.Screen name="VideoAulas" component={VideoAulas} />
+      <stack.Screen
+        name="Login"
+        component={Login}
+        options={{ headerShown: false }}
+      />
+      <stack.Screen
+        name="EsqueciSenha"
+        component={EsqueciSenha}
+        options={{ headerShown: false }}
+      />
+      <stack.Screen
+        name="Home"
+        component={Home}
+        options={{ headerShown: false }}
+      />
+      <stack.Screen
+        name="CadastroCurriculo"
+        component={CadastroCurriculo}
+        options={{ headerShown: false }}
+      />
+      <stack.Screen
+        name="Cursos"
+        component={Cursos}
+        options={{ headerShown: false }}
+      />
+      <stack.Screen
+        name="Eventos"
+        component={Eventos}
+        options={{ headerShown: false }}
+      />
+      <stack.Screen
+        name="Jogos"
+        component={Jogos}
+        options={{ headerShown: false }}
+      />
+      <stack.Screen
+        name="Vagas"
+        component={Vagas}
+        options={{ headerShown: false }}
+      />
+      <stack.Screen
+        name="VideoAulas"
+        component={VideoAulas}
+        options={{ headerShown: false }}
+      />
     </stack.Navigator>
   );
 }
