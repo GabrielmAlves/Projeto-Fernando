@@ -15,8 +15,7 @@ export default function App(props) {
         navigation.navigate(props.screen);
       }}
     >
-      <Icons name={props.icon} size={60} color={"#FFF"} />
-      <Text style={styles.text}>{props.text}</Text>
+      
     </TouchableOpacity>
   );
 }
