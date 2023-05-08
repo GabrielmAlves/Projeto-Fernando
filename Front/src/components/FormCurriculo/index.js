@@ -13,23 +13,12 @@ export default function App() {
   const [data, setData] = useState(null);
 
 
-
-async function loadInstituto(){
-  return await fetch(config.urlRootNode + "curriculo").then((res) => res.json())
-    .then((json) => setInstituicao(json.instituicao))
-}
-async function loadEmpresas(){
-  return await fetch(config.urlRootNode + "curriculo").then((res) => res.json()).then((json) => setEmpresas(json.empresas))
-}
-async function loadCursos(){ return await fetch(config.urlRootNode + "curriculo").then((res) => res.json()).then((json) => setCursos(json.cursos))
-}
-async function loadCArgos(){ return await fetch(config.urlRootNode + "curriculo").then((res) => res.json()).then((json) => setCargos(json.cargos))
-}
-
-
- 
-
-  
+  useEffect(() => {
+    fetch(config.urlRootNode + "curriculo").then((res) => res.json()).then((json) => setInstituicao(json.instituicao))
+    fetch(config.urlRootNode + "curriculo").then((res) => res.json()).then((json) => setEmpresas(json.empresas))
+    fetch(config.urlRootNode + "curriculo").then((res) => res.json()).then((json) => setCursos(json.cursos))
+    fetch(config.urlRootNode + "curriculo").then((res) => res.json()).then((json) => setCargos(json.cargos))
+  },[]); 
 
   
   async function createCV() {
@@ -78,7 +67,7 @@ async function loadCArgos(){ return await fetch(config.urlRootNode + "curriculo"
         style={styles.input}
         placeholder="Digite o nome da sua instituição de ensino"
         onChangeText={setInstituicao}
-        value={loadInstituto}
+        value={instituicao}
       />
     </View>
 
@@ -88,7 +77,7 @@ async function loadCArgos(){ return await fetch(config.urlRootNode + "curriculo"
         style={styles.input}
         placeholder="Digite o nome das empresas em que trabalhou"
         onChangeText={setEmpresas}
-        value={loadEmpresas}
+        value={empresas}
       />
     </View>
 
@@ -98,7 +87,7 @@ async function loadCArgos(){ return await fetch(config.urlRootNode + "curriculo"
         style={styles.input}
         placeholder="Digite o nome dos cursos extras que fez"
         onChangeText={setCursos}
-        value={loadCursos}
+        value={cursos}
       />
     </View>
 
@@ -108,13 +97,13 @@ async function loadCArgos(){ return await fetch(config.urlRootNode + "curriculo"
         style={styles.input}
         placeholder="Digite os cargos que ocupou"
         onChangeText={setCargos}
-        value={loadCArgos}
+        value={cargos}
       />
     </View>
 
     <View style= {styles.viewButtons}>
 
-    <TouchableOpacity style={styles.update} onPress={eraseCV} >
+    <TouchableOpacity style={styles.update} onPress={createCV} >
         <Text style={styles.textUpdate}>Atualizar</Text>
       </TouchableOpacity>
 

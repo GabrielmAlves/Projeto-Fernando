@@ -78,7 +78,7 @@ app.get('/curriculo', async(req,res) => {
                       cargos: ""
             });
         }
-    });    
+    }); 
 });
 
 app.post('/create', async(req,res) => {
