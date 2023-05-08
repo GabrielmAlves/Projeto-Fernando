@@ -12,11 +12,24 @@ export default function App() {
   const [cargos, setCargos] = useState("");
   const [data, setData] = useState(null);
 
-  // fetch(config.urlRootNode + "curriculo").then((res) => res.json())
-  //   .then((json) => setInstituicao(json.instituicao))
-  // fetch(config.urlRootNode + "curriculo").then((res) => res.json()).then((json) => setEmpresas(json.empresas))
-  // fetch(config.urlRootNode + "curriculo").then((res) => res.json()).then((json) => setCursos(json.cursos))
-  // fetch(config.urlRootNode + "curriculo").then((res) => res.json()).then((json) => setCargos(json.cargos))
+
+
+async function loadInstituto(){
+  return await fetch(config.urlRootNode + "curriculo").then((res) => res.json())
+    .then((json) => setInstituicao(json.instituicao))
+}
+async function loadEmpresas(){
+  return await fetch(config.urlRootNode + "curriculo").then((res) => res.json()).then((json) => setEmpresas(json.empresas))
+}
+async function loadCursos(){ return await fetch(config.urlRootNode + "curriculo").then((res) => res.json()).then((json) => setCursos(json.cursos))
+}
+async function loadCArgos(){ return await fetch(config.urlRootNode + "curriculo").then((res) => res.json()).then((json) => setCargos(json.cargos))
+}
+
+
+ 
+
+  
 
   
   async function createCV() {
@@ -65,7 +78,7 @@ export default function App() {
         style={styles.input}
         placeholder="Digite o nome da sua instituição de ensino"
         onChangeText={setInstituicao}
-        value={instituicao}
+        value={loadInstituto}
       />
     </View>
 
@@ -75,7 +88,7 @@ export default function App() {
         style={styles.input}
         placeholder="Digite o nome das empresas em que trabalhou"
         onChangeText={setEmpresas}
-        value={empresas}
+        value={loadEmpresas}
       />
     </View>
 
@@ -85,7 +98,7 @@ export default function App() {
         style={styles.input}
         placeholder="Digite o nome dos cursos extras que fez"
         onChangeText={setCursos}
-        value={cursos}
+        value={loadCursos}
       />
     </View>
 
@@ -95,7 +108,7 @@ export default function App() {
         style={styles.input}
         placeholder="Digite os cargos que ocupou"
         onChangeText={setCargos}
-        value={cargos}
+        value={loadCArgos}
       />
     </View>
 
