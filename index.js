@@ -128,14 +128,27 @@ app.get('/cursos', async(req,res) => {
 
         if(rows[0] != undefined) {
             console.log(rows);
-            res.json({
-                cursos: rows
-            })
+            res.json({cursos: rows});
         } else {
             res.json({cursos: false});
         }
         
-    })
+    });
+});
+
+app.get('/curso', async(req,res) => {
+
+    con.query('SELECT * FROM curso WHERE id = ?',[req.body.idCurso], (err, rows) => {
+        if (err) throw err
+
+        if(rows[0] != undefined) {
+            console.log(rows);
+            res.json({cursos: rows})
+        } else {
+            res.json({cursos: false});
+        }
+        
+    });
 });
 
 app.listen(port, (req,res) => {
