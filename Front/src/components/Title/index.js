@@ -1,4 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
+import styles from "./style";
 
 export default function App() {
   return (
@@ -7,16 +8,3 @@ export default function App() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  Title: {
-    fontSize: 40,
-    color: "orange",
-    fontWeight: "bold",
-  },
-  titleContainer: {
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 60,
-  },
-});

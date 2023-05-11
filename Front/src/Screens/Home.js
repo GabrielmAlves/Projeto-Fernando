@@ -3,11 +3,13 @@ import Title from "../components/Title";
 import ButtonHome from "../components/ButtonHome";
 import { useNavigation } from "@react-navigation/native";
 import { CommonActions } from "@react-navigation/native";
+import HeaderNavigacao from "../components/HeaderNavigacao";
 export default function App() {
   const navigation = useNavigation(); //vai fazer a navegação funcionar
 
   return (
     <View style={styles.container}>
+      <HeaderNavigacao back="Login"></HeaderNavigacao>
       <ScrollView>
         <ButtonHome
           text="Currículo"

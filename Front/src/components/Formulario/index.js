@@ -13,6 +13,8 @@ import Icons from "react-native-vector-icons/FontAwesome";
 import { useNavigation } from "@react-navigation/native";
 import { CommonActions } from "@react-navigation/native";
 import ButtonEsqueciSenha from "../ButtonEsqueciSenha";
+import styles from "./style";
+
 export default function App() {
   const navigation = useNavigation(); //vai fazer a navegação funcionar
   const [email, setEmail] = useState(null);
@@ -21,29 +23,34 @@ export default function App() {
   const [data, setData] = useState(null);
 
   async function loginUser() {
-    let req = await fetch(config.urlRootNode + "login", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        emailUser: email,
-        senhaUser: senha,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => setData(data.login));
-  }
-
-  if (data) {
-    setData(null);
+    // let req = await fetch(config.urlRootNode + "login", {
+    //   method: "POST",
+    //   headers: {
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     emailUser: email,
+    //     senhaUser: senha,
+    //   }),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => setData(data.login));
     navigation.dispatch(
       CommonActions.navigate({
         name: "Home",
       })
     );
   }
+
+  // if (data) {
+  //   setData(null);
+  //   navigation.dispatch(
+  //     CommonActions.navigate({
+  //       name: "Home",
+  //     })
+  //   );
+  // }
 
   return (
     <View style={styles.formContainer}>
@@ -93,67 +100,3 @@ export default function App() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  formContainer: {
-    width: "100%",
-    height: "100%",
-    alignItems: "center",
-    marginTop: 20,
-    padding: 5,
-  },
-  formLabel: {
-    fontSize: 15,
-  },
-  formInput: {
-    width: "100%",
-    borderWidth: 1,
-    borderColor: "grey",
-    height: 45,
-    borderRadius: 5,
-    marginBottom: 5,
-    paddingLeft: 5,
-  },
-  form: {
-    width: "100%",
-    height: "auto",
-    padding: 10,
-  },
-  semConta: {
-    marginBottom: 20,
-    marginTop: 10,
-  },
-  noShare: {
-    fontWeight: "bold",
-    marginBottom: 10,
-  },
-  containerEsqueciSenha: {
-    flexDirection: "row",
-    paddingVertical: 10,
-  },
-  habilitarContainer: {
-    flexDirection: "row",
-    columnGap: 3,
-    marginBottom: 10,
-    height: 20,
-  },
-
-  passwordArea: {
-    flexDirection: "row",
-    width: "100%",
-    borderWidth: 1,
-    borderColor: "grey",
-    height: 45,
-    borderRadius: 5,
-    marginBottom: 5,
-    paddingLeft: 5,
-    alignItems: "center",
-  },
-  formPassword: {
-    width: "88%",
-  },
-  eyeIcon: {
-    width: "12%",
-    justifyContent: "center",
-  },
-});

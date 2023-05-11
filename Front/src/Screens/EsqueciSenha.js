@@ -8,10 +8,12 @@ import {
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import FormEsqueciSenha from "../components/FormEsqueciSenha";
+import HeaderNavigacao from "../components/HeaderNavigacao";
 
 export default function () {
   return (
     <View style={styles.container}>
+      <HeaderNavigacao back="Login" />
       <FormEsqueciSenha />
     </View>
   );
