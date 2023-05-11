@@ -121,6 +121,23 @@ app.post('/delete', async(req,res) => {
     })
 });
 
+app.get('/cursos', async(req,res) => {
+
+    con.query('SELECT * FROM curso', (err, rows) => {
+        if (err) throw err
+
+        if(rows[0] != undefined) {
+            console.log(rows);
+            res.json({
+                cursos: rows
+            })
+        } else {
+            res.json({cursos: false});
+        }
+        
+    })
+});
+
 app.listen(port, (req,res) => {
     console.log('Servidor rodando');
 });
