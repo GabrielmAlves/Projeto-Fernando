@@ -1,30 +1,37 @@
-import { StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import AvisoSemConteudo from "../components/SemConteudo";
 import HeaderNavigacao from "../components/HeaderNavigacao";
 import AcessoSecao from "../components/AcessarSecao";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import config from "../../config/config.json";
 
 
 export default function Cursos() {
+  
+  const [allCourses, setAllCourses] = useState([]);
 
-  useEffect(() => {
-    fetch(config.urlRootNode + "cursos")
+    useEffect(() => {
+     fetch(config.urlRootNode + "cursos")
       .then((res) => res.json())
-      .then((json) => console.log(json.cursos));
+       .then((json) =>{
+       setAllCourses(json.cursos)})
+    
   }, []);
 
   return (
     <View style={styles.container}>
       <HeaderNavigacao back="Home" />
-      <View style={styles.contentArea}>
-        <AcessoSecao />
-        <AcessoSecao />
-        <AcessoSecao />
-        <AcessoSecao />
+    
+      {
+        allCourses.length > 0 ? (
+          <View style={styles.contentArea}> 
+        {   allCourses.map(item => (
+              <AcessoSecao titulo={item.titulo} url={item.url}/>
+          ))}
       </View>
-
-      {/* <AvisoSemConteudo text="cursos" /> */}
+      )   :   <AvisoSemConteudo text="cursos" />
+      }
+      
     </View>
   );
 }

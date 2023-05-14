@@ -23,34 +23,29 @@ export default function App() {
   const [data, setData] = useState(null);
 
   async function loginUser() {
-    // let req = await fetch(config.urlRootNode + "login", {
-    //   method: "POST",
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     emailUser: email,
-    //     senhaUser: senha,
-    //   }),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => setData(data.login));
+    let req = await fetch(config.urlRootNode + "login", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        emailUser: email,
+        senhaUser: senha,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => setData(data.login));
+  }
+
+  if (data) {
+    setData(null);
     navigation.dispatch(
       CommonActions.navigate({
         name: "Home",
       })
     );
   }
-
-  // if (data) {
-  //   setData(null);
-  //   navigation.dispatch(
-  //     CommonActions.navigate({
-  //       name: "Home",
-  //     })
-  //   );
-  // }
 
   return (
     <View style={styles.formContainer}>

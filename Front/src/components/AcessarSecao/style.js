@@ -19,4 +19,9 @@ export default styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 10,
   },
+  titulo:{
+    textAlign:"center",
+    fontSize:16,
+    color:"orange"
+  }
 });

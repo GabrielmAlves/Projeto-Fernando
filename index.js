@@ -147,7 +147,6 @@ app.get('/curso', async(req,res) => {
         } else {
             res.json({cursos: false});
         }
-        
     });
 });
 

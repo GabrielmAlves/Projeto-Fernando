@@ -1,15 +1,32 @@
 import { StyleSheet, Text, View } from "react-native";
 import AvisoSemConteudo from "../components/SemConteudo";
 import HeaderNavigacao from "../components/HeaderNavigacao";
-
+ 
 export default function Jogos() {
-  return (
-    <View style={styles.container}>
-      <HeaderNavigacao back="Home" />
 
-      <AvisoSemConteudo text="jogos" />
-    </View>
-  );
+  const [allJogos, setAllJogos] = useState([]);
+
+  useEffect(() => {
+    fetch(config.urlRootNode + "jogos")
+     .then((res) => res.json())
+      .then((json) =>{
+        setAllJogos(json.jogos)})
+   
+ }, []);
+   return (
+     <View style={styles.container}>
+       <HeaderNavigacao back="Home" />
+       {
+         allJogos.length > 0 ? (
+           <View style={styles.contentArea}> 
+         {   allJogos.map(item => (
+               <AcessoSecao titulo={item.titulo} url={item.url}/>
+           ))}
+       </View>
+       )   :   <AvisoSemConteudo text="jogos" />
+       }
+     </View>
+   );
 }
 
 const styles = StyleSheet.create({
