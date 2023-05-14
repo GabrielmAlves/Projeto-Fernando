@@ -5,7 +5,7 @@ import styles from "./style";
 import { useNavigation } from "@react-navigation/native";
 
 
-const navigation = useNavigation(); //vai fazer a navegação funcionar
+//const navigation = useNavigation(); //vai fazer a navegação funcionar
 
 
 export default function AcessoSecao(props) {
@@ -19,7 +19,7 @@ export default function AcessoSecao(props) {
         <TouchableOpacity> 
           <Icons name="info-circle" size={35} color="orange" />
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=>{navigation.navigate(props.url)}}>
+        <TouchableOpacity >
           <Icons name="arrow-right" size={35} color="orange"  />
         </TouchableOpacity>
       </View>

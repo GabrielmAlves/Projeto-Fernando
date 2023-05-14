@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View } from "react-native";
 import AvisoSemConteudo from "../components/SemConteudo";
 import HeaderNavigacao from "../components/HeaderNavigacao"; 
+import { useEffect, useState } from "react";
+import config from "../../config/config.json";
 
 export default function Vagas() {
   const [allVagas, setAllVagas] = useState([]);
@@ -9,7 +11,7 @@ export default function Vagas() {
     fetch(config.urlRootNode + "vagas")
      .then((res) => res.json())
       .then((json) =>{
-        setAllVagas(json.Vagas)})
+        setAllVagas(json.vagas)})
    
  }, []);
    return (

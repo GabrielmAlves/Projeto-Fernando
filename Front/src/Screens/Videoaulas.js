@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View } from "react-native";
 import AvisoSemConteudo from "../components/SemConteudo";
 import HeaderNavigacao from "../components/HeaderNavigacao"; 
+import { useEffect, useState } from "react";
+import config from "../../config/config.json";
 
 export default function Videoaulas() {
   const [allVideoaulas, setAllVideoaulas] = useState([]);
@@ -9,7 +11,7 @@ export default function Videoaulas() {
     fetch(config.urlRootNode + "videoaulas")
      .then((res) => res.json())
       .then((json) =>{
-        setAllVideoaulas(json.Videoaulas)})
+        setAllVideoaulas(json.videoaulas)})
    
  }, []);
    return (

@@ -130,7 +130,7 @@ app.get('/cursos', async(req,res) => {
             console.log(rows);
             res.json({cursos: rows});
         } else {
-            res.json({cursos: false});
+            res.json({cursos: []});
         }
         
     });
@@ -141,12 +141,67 @@ app.get('/curso', async(req,res) => {
     con.query('SELECT * FROM curso WHERE id = ?',[req.body.idCurso], (err, rows) => {
         if (err) throw err
 
+        // TODO detalhes curso
+    });
+});
+
+app.get('/eventos', async(req,res) => {
+
+    con.query('SELECT * FROM evento', (err, rows) => {
+        if (err) throw err
+
         if(rows[0] != undefined) {
             console.log(rows);
-            res.json({cursos: rows})
+            res.json({eventos: rows});
         } else {
-            res.json({cursos: false});
+            res.json({eventos: []});
         }
+        
+    });
+});
+
+app.get('/jogos', async(req,res) => {
+
+    con.query('SELECT * FROM jogo', (err, rows) => {
+        if (err) throw err
+
+        if(rows[0] != undefined) {
+            console.log(rows);
+            res.json({jogos: rows});
+        } else {
+            res.json({jogos: []});
+        }
+        
+    });
+});
+
+app.get('/videoaulas', async(req,res) => {
+
+    con.query('SELECT * FROM videoaula', (err, rows) => {
+        if (err) throw err
+
+        if(rows[0] != undefined) {
+            console.log(rows);
+            res.json({videoaulas: rows});
+        } else {
+            res.json({videoaulas: []});
+        }
+        
+    });
+});
+
+app.get('/vagas', async(req,res) => {
+
+    con.query('SELECT * FROM vaga', (err, rows) => {
+        if (err) throw err
+
+        if(rows[0] != undefined) {
+            console.log(rows);
+            res.json({vagas: rows});
+        } else {
+            res.json({vagas: []});
+        }
+        
     });
 });
 
