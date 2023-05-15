@@ -9,6 +9,7 @@ import {
 import React, { useState, useEffect } from "react";
 import config from "../../../config/config.json";
 import styles from "./style";
+import Modal from 'react-native-modal';
 
 export default function App() {
   const [instituicao, setInstituicao] = useState("");
