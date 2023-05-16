@@ -11,7 +11,7 @@ export default function(){
     // };
 
     return(
-        <View style={styles.modalContainer}>
+        <View>
 
             <Modal 
             animationType="slide"
@@ -20,8 +20,8 @@ export default function(){
             style={{}}>
 
              <View>
-                <Text style={styles.textoModalSalvar}>Currículo salvo!</Text>
-                <Button style={styles.botaoModalSalvar}
+                <Text>Currículo deletado!</Text>
+                <Button
                 title="Fechar">
                  onPress={()=>
                  {setVisivel(false)}}   

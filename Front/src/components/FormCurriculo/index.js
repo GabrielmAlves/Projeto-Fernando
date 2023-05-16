@@ -10,6 +10,7 @@ import React, { useState, useEffect } from "react";
 import config from "../../../config/config.json";
 import styles from "./style";
 import Modal from 'react-native-modal';
+import ModalSalvar from "../ModalSalvar";
 
 export default function App() {
   const [instituicao, setInstituicao] = useState("");
@@ -32,6 +33,15 @@ export default function App() {
       .then((res) => res.json())
       .then((json) => setCargos(json.cargos));
   }, []);
+
+  const handlePress = ()=>{
+    createCV();
+    save();
+  };
+
+  const save = ()=> {
+    <ModalSalvar></ModalSalvar>
+  };
 
   async function createCV() {
     let req = await fetch(config.urlRootNode + "create", {
@@ -120,9 +130,13 @@ export default function App() {
           <Text style={styles.textDelete}>Deletar</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.save} onPress={createCV}>
+
+        <TouchableOpacity style={styles.save} onPress={handlePress}>
           <Text style={styles.textSave}>Salvar</Text>
         </TouchableOpacity>
+        {/* <TouchableOpacity style={styles.save} onPress={createCV}>
+          <Text style={styles.textSave}>Salvar</Text>
+        </TouchableOpacity> */}
       </View>
     </View>
   );
