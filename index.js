@@ -127,7 +127,6 @@ app.get('/cursos', async(req,res) => {
         if (err) throw err
 
         if(rows[0] != undefined) {
-            console.log(rows);
             res.json({cursos: rows});
         } else {
             res.json({cursos: []});
@@ -145,13 +144,25 @@ app.get('/curso', async(req,res) => {
     });
 });
 
+app.post('/buscaCurso', async(req,res) => {
+    con.query("SELECT * FROM curso WHERE titulo LIKE ?",([req.body.filtroBusca]+'%'), (err, rows) => {
+        if (err) throw err
+
+        if(rows[0] != undefined) {
+            res.json({cursos: rows});
+        } else {
+            console.log("nada");
+            res.json({cursos: []});
+        }
+    });    
+});
+
 app.get('/eventos', async(req,res) => {
 
     con.query('SELECT * FROM evento', (err, rows) => {
         if (err) throw err
 
         if(rows[0] != undefined) {
-            console.log(rows);
             res.json({eventos: rows});
         } else {
             res.json({eventos: []});
@@ -160,13 +171,27 @@ app.get('/eventos', async(req,res) => {
     });
 });
 
+app.post('/buscaEvento', async(req,res) => {
+    console.log(req.body.filtroBusca)
+    con.query("SELECT * FROM evento WHERE titulo LIKE ?",([req.body.filtroBusca]+'%'), (err, rows) => {
+        if (err) throw err
+
+        if(rows[0] != undefined) {
+            console.log(rows);
+            res.json({eventos: rows});
+        } else {
+            console.log("nada");
+            res.json({eventos: []});
+        }
+    });    
+});
+
 app.get('/jogos', async(req,res) => {
 
     con.query('SELECT * FROM jogo', (err, rows) => {
         if (err) throw err
 
         if(rows[0] != undefined) {
-            console.log(rows);
             res.json({jogos: rows});
         } else {
             res.json({jogos: []});
@@ -175,13 +200,25 @@ app.get('/jogos', async(req,res) => {
     });
 });
 
+app.post('/buscaJogo', async(req,res) => {
+    con.query("SELECT * FROM jogo WHERE titulo LIKE ?",([req.body.filtroBusca]+'%'), (err, rows) => {
+        if (err) throw err
+
+        if(rows[0] != undefined) {
+            res.json({jogos: rows});
+        } else {
+            console.log("nada");
+            res.json({jogos: []});
+        }
+    });    
+});
+
 app.get('/videoaulas', async(req,res) => {
 
     con.query('SELECT * FROM videoaula', (err, rows) => {
         if (err) throw err
 
         if(rows[0] != undefined) {
-            console.log(rows);
             res.json({videoaulas: rows});
         } else {
             res.json({videoaulas: []});
@@ -190,19 +227,44 @@ app.get('/videoaulas', async(req,res) => {
     });
 });
 
+app.post('/buscaVideoaula', async(req,res) => {
+    con.query("SELECT * FROM videoaula WHERE titulo LIKE ?",([req.body.filtroBusca]+'%'), (err, rows) => {
+        if (err) throw err
+
+        if(rows[0] != undefined) {
+            res.json({videoaulas: rows});
+        } else {
+            console.log("nada");
+            res.json({videoaulas: []});
+        }
+    });    
+});
+
 app.get('/vagas', async(req,res) => {
 
     con.query('SELECT * FROM vaga', (err, rows) => {
         if (err) throw err
 
         if(rows[0] != undefined) {
-            console.log(rows);
             res.json({vagas: rows});
         } else {
             res.json({vagas: []});
         }
         
     });
+});
+
+app.post('/buscaVaga', async(req,res) => {
+    con.query("SELECT * FROM vaga WHERE titulo LIKE ?",([req.body.filtroBusca]+'%'), (err, rows) => {
+        if (err) throw err
+
+        if(rows[0] != undefined) {
+            res.json({vagas: rows});
+        } else {
+            console.log("nada");
+            res.json({vagas: []});
+        }
+    });    
 });
 
 app.listen(port, (req,res) => {

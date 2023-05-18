@@ -1,14 +1,19 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, Linking } from "react-native";
 import Icons from "react-native-vector-icons/FontAwesome";
 import { Image } from "react-native";
 import styles from "./style";
 import { useNavigation } from "@react-navigation/native";
-
+import config from "../../../config/config.json";
 
 //const navigation = useNavigation(); //vai fazer a navegação funcionar
 
 
 export default function AcessoSecao(props) {
+
+  const handlePress = () => {
+    Linking.openURL(props.url);
+  };
+  
   return (
     <View style={styles.Container}>
       <View>
@@ -19,7 +24,7 @@ export default function AcessoSecao(props) {
         <TouchableOpacity> 
           <Icons name="info-circle" size={35} color="orange" />
         </TouchableOpacity>
-        <TouchableOpacity >
+        <TouchableOpacity onPress={handlePress} >
           <Icons name="arrow-right" size={35} color="orange"  />
         </TouchableOpacity>
       </View>

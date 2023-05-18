@@ -1,11 +1,16 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TextInput, TouchableOpacity } from "react-native";
 import AvisoSemConteudo from "../components/SemConteudo";
 import HeaderNavigacao from "../components/HeaderNavigacao"; 
+import AcessoSecao from "../components/AcessarSecao";
 import { useEffect, useState } from "react";
 import config from "../../config/config.json";
+import stylesFilter from "../components/InputDeFiltro/style"
+import Icons from "react-native-vector-icons/FontAwesome";
+
 
 export default function Videoaulas() {
   const [allVideoaulas, setAllVideoaulas] = useState([]);
+  const [filtro, setFiltro] = useState("");
 
   useEffect(() => {
     fetch(config.urlRootNode + "videoaulas")
@@ -14,14 +19,41 @@ export default function Videoaulas() {
         setAllVideoaulas(json.videoaulas)})
    
  }, []);
+
+ async function busca() {
+  let req = await fetch(config.urlRootNode + "buscaVideoaula", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      filtroBusca: filtro,
+    }),
+  })
+    .then((res) => res.json())
+    .then((data) => setAllVideoaulas(data.videoaulas));
+}
+
    return (
-     <View style={styles.container}>
+     <View style={styles.container}> 
        <HeaderNavigacao back="Home" />
+       <View style={stylesFilter.FilterArea}>
+          <TextInput
+            style={stylesFilter.formFilter}
+            placeholder="Faça uma pesquisa"
+            onChangeText={(text) => setFiltro(text)}
+          />
+          <TouchableOpacity onPress={busca}>
+          <Icons name="search" size={25} color="orange"/>
+          </TouchableOpacity>
+        </View>
+
        {
          allVideoaulas.length > 0 ? (
            <View style={styles.contentArea}> 
          {   allVideoaulas.map(item => (
-               <AcessoSecao titulo={item.titulo} url={item.url}/>
+               <AcessoSecao titulo={item.titulo} url={item.url} logo={item.logo}/>
            ))}
        </View>
        )   :   <AvisoSemConteudo text="videoaulas" />
