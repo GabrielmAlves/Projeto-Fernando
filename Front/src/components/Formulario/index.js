@@ -10,11 +10,17 @@ import { CheckBox } from "react-native-btr";
 import React, { useState, useEffect } from "react";
 import config from "../../../config/config.json";
 import Icons from "react-native-vector-icons/FontAwesome";
+import { useNavigation } from "@react-navigation/native";
+import { CommonActions } from "@react-navigation/native";
+import ButtonEsqueciSenha from "../ButtonEsqueciSenha";
+import styles from "./style";
 
 export default function App() {
+  const navigation = useNavigation(); //vai fazer a navegação funcionar
   const [email, setEmail] = useState(null);
   const [senha, setSenha] = useState(null);
   const [hidePassword, setHidePassoword] = useState(true);
+  const [data, setData] = useState(null);
 
   async function loginUser() {
     let req = await fetch(config.urlRootNode + "login", {
@@ -27,7 +33,18 @@ export default function App() {
         emailUser: email,
         senhaUser: senha,
       }),
-    });
+    })
+      .then((res) => res.json())
+      .then((data) => setData(data.login));
+  }
+
+  if (data) {
+    setData(null);
+    navigation.dispatch(
+      CommonActions.navigate({
+        name: "Home",
+      })
+    );
   }
 
   return (
@@ -64,86 +81,17 @@ export default function App() {
         {/* <Text style={styles.noShare}>
           Não compartilhe este campo com ninguém
         </Text> */}
-        <Text style={styles.semConta}>
+        {/* <Text style={styles.semConta}>
           Sem conta? Entre em contato com o órgão responsável
-        </Text>
+        </Text> */}
 
         <View style={styles.containerEsqueciSenha}>
-          <View style={styles.habilitarContainer}>
-            <CheckBox />
-            <Text style={styles.textHabilitar}>Habilitar Leitor</Text>
-          </View>
-          <Text style={styles.esqueciSenha}>Esqueci minha senha!</Text>
+          {/* <TouchableOpacity style={styles.esqueciSenha} screen="Forget">Esqueci minha senha!</TouchableOpacity> */}
+          {/* <Forget /> */}
+          <ButtonEsqueciSenha screen="EsqueciSenha"></ButtonEsqueciSenha>
         </View>
         <Button title="Entrar" color="#FFA500" onPress={loginUser} />
       </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  formContainer: {
-    width: "100%",
-    height: "100%",
-    alignItems: "center",
-    marginTop: 20,
-    padding: 5,
-  },
-  formLabel: {
-    fontSize: 15,
-  },
-  formInput: {
-    width: "100%",
-    borderWidth: 1,
-    borderColor: "grey",
-    height: 45,
-    borderRadius: 5,
-    marginBottom: 5,
-    paddingLeft: 5,
-  },
-  form: {
-    width: "100%",
-    height: "auto",
-    padding: 10,
-  },
-  semConta: {
-    marginBottom: 20,
-    marginTop: 10,
-  },
-  noShare: {
-    fontWeight: "bold",
-    marginBottom: 10,
-  },
-  containerEsqueciSenha: {
-    flexDirection: "row",
-    columnGap: 80,
-  },
-  habilitarContainer: {
-    flexDirection: "row",
-    columnGap: 3,
-    marginBottom: 10,
-    height: 20,
-  },
-  esqueciSenha: {
-    color: "orange",
-    marginBottom: 40,
-  },
-  passwordArea: {
-    flexDirection: "row",
-    width: "100%",
-    borderWidth: 1,
-    borderColor: "grey",
-    height: 45,
-    borderRadius: 5,
-    marginBottom: 5,
-    paddingLeft: 5,
-    alignItems: "center",
-  },
-  formPassword: {
-    width: "88%",
-  },
-  eyeIcon: {
-    width: "12%",
-    justifyContent: "center",
-  },
-});

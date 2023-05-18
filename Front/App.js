@@ -1,21 +1,76 @@
 import { StyleSheet, Text, View } from "react-native";
 import Title from "./src/components/Title";
 import Form from "./src/components/Formulario";
+import CadastroCurriculo from "./src/Screens/CadastroCurriculo";
+import { NavigationContainer, StackRouter } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Cursos from "./src/Screens/Cursos";
+import Login from "./src/Screens/Login";
+import Home from "./src/Screens/Home";
+import Eventos from "./src/Screens/Eventos";
+import Jogos from "./src/Screens/Jogos";
+import Vagas from "./src/Screens/Vagas";
+import VideoAulas from "./src/Screens/Videoaulas";
+import EsqueciSenha from "./src/Screens/EsqueciSenha";
 
-export default function App() {
+const stack = createNativeStackNavigator();
+
+function MyStack() {
   return (
-    <View style={styles.container}>
-      <Title />
-      <Form />
-    </View>
+    <stack.Navigator>
+      <stack.Screen
+        name="Login"
+        component={Login}
+        options={{ headerShown: false }}
+      />
+      <stack.Screen
+        name="EsqueciSenha"
+        component={EsqueciSenha}
+        options={{ headerShown: false }}
+      />
+      <stack.Screen
+        name="Home"
+        component={Home}
+        options={{ headerShown: false }}
+      />
+      <stack.Screen
+        name="CadastroCurriculo"
+        component={CadastroCurriculo}
+        options={{ headerShown: false }}
+      />
+      <stack.Screen
+        name="Cursos"
+        component={Cursos}
+        options={{ headerShown: false }}
+      />
+      <stack.Screen
+        name="Eventos"
+        component={Eventos}
+        options={{ headerShown: false }}
+      />
+      <stack.Screen
+        name="Jogos"
+        component={Jogos}
+        options={{ headerShown: false }}
+      />
+      <stack.Screen
+        name="Vagas"
+        component={Vagas}
+        options={{ headerShown: false }}
+      />
+      <stack.Screen
+        name="VideoAulas"
+        component={VideoAulas}
+        options={{ headerShown: false }}
+      />
+    </stack.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "flex-start",
-  },
-});
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyStack />
+    </NavigationContainer>
+  );
+}
