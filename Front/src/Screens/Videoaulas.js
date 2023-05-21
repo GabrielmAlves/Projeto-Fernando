@@ -9,16 +9,13 @@ import Icons from "react-native-vector-icons/FontAwesome";
 
 
 export default function Videoaulas() {
-  const [allVideoaulas, setAllVideoaulas] = useState([]);
+  const [allVideoaulas, setAllVideoaulas] = useState(fetch(config.urlRootNode + "videoaulas")
+  .then((res) => res.json())
+   .then((json) =>{
+   json.videoaulas}));
   const [filtro, setFiltro] = useState("");
 
-  useEffect(() => {
-    fetch(config.urlRootNode + "videoaulas")
-     .then((res) => res.json())
-      .then((json) =>{
-        setAllVideoaulas(json.videoaulas)})
-   
- }, []);
+
 
  async function busca() {
   let req = await fetch(config.urlRootNode + "buscaVideoaula", {

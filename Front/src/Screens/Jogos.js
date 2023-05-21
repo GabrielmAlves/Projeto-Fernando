@@ -10,14 +10,14 @@ import Icons from "react-native-vector-icons/FontAwesome";
 
 export default function Jogos() {
 
-  const [allJogos, setAllJogos] = useState([]);
+  const [allJogos, setAllJogos] = useState( fetch(config.urlRootNode + "jogos")
+  .then((res) => res.json())
+   .then((json) =>{
+    json.jogos}) );
   const [filtro, setFiltro] = useState("");
 
   useEffect(() => {
-    fetch(config.urlRootNode + "jogos")
-     .then((res) => res.json())
-      .then((json) =>{
-        setAllJogos(json.jogos)}) 
+   
    
  }, []);
 

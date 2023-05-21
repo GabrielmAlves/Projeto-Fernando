@@ -9,16 +9,12 @@ import Icons from "react-native-vector-icons/FontAwesome";
 
 
 export default function Eventos() {
-  const [allEvents, setAllEvents] = useState([]);
+  const [allEvents, setAllEvents] = useState(fetch(config.urlRootNode + "eventos")
+  .then((res) => res.json())
+   .then((json) =>{
+  json.eventos}) );
   const [filtro, setFiltro] = useState("");
 
-  useEffect(() => {
-   fetch(config.urlRootNode + "eventos")
-    .then((res) => res.json())
-     .then((json) =>{
-     setAllEvents(json.eventos)}) 
-  
-}, []);
 
 async function busca() {
   let req = await fetch(config.urlRootNode + "buscaEvento", {

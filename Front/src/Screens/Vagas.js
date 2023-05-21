@@ -9,16 +9,13 @@ import Icons from "react-native-vector-icons/FontAwesome";
 
 
 export default function Vagas() {
-  const [allVagas, setAllVagas] = useState([]);
+  const [allVagas, setAllVagas] = useState(fetch(config.urlRootNode + "vagas")
+  .then((res) => res.json())
+   .then((json) =>{
+     json.vagas}));
   const [filtro, setFiltro] = useState("");
 
-  useEffect(() => {
-    fetch(config.urlRootNode + "vagas")
-     .then((res) => res.json())
-      .then((json) =>{
-        setAllVagas(json.vagas)})
-    
- }, []);
+
 
  async function busca() {
   let req = await fetch(config.urlRootNode + "buscaVaga", {
