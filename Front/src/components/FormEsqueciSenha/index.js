@@ -13,23 +13,23 @@ import styles from "./style";
 
 export default function () {
   const [emailCadastrado, setEmailCadastrado] = useState("");
-  const [novaSenha, setNovaSenha] = useState("");
+  const [novaSenha, setNovaSenha] = useState("");//nova senha do usuário
   const [confirmaSenha, setConfirmaSenha] = useState("");
 
-  // async function changePassword() {
-  //     let req = await fetch(config.urlRootNode + "change", {
-  //       method: "POST",
-  //       headers: {
-  //         "Accept": "application/json",
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         email: emailCadastrado,
-  //         newPassword: novaSenha,
-  //         confirmPassword: confirmaSenha,
-  //       }),
-  //     });
-  //   }
+   async function changePassword() {
+     let req = await fetch(config.urlRootNode + "alteraSenha", {
+         method: "POST",
+         headers: {
+           "Accept": "application/json",
+           "Content-Type": "application/json",
+         },
+         body: JSON.stringify({
+           newPassword: novaSenha,
+         }),
+       });
+     }
+
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Esqueci minha senha</Text>
@@ -49,7 +49,7 @@ export default function () {
         <TextInput
           style={styles.input}
           placeholder="Digite sua nova senha"
-          // onChangeText={setNovaSenha}
+           //onChangeText={}
           value={novaSenha}
         />
       </View>
@@ -59,13 +59,13 @@ export default function () {
         <TextInput
           style={styles.input}
           placeholder="Confirme sua senha"
-          // onChangeText={setConfirmaSenha}
+           onChangeText={setNovaSenha}
           value={confirmaSenha}
         />
       </View>
 
       <View style={styles.viewButtons}>
-        <TouchableOpacity style={styles.alterar}>
+        <TouchableOpacity style={styles.alterar} onPress={changePassword} >
           <Text style={styles.textAlterar}>Alterar senha</Text>
         </TouchableOpacity>
       </View>

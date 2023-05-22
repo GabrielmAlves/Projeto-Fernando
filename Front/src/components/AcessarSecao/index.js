@@ -16,21 +16,9 @@ export default function AcessoSecao(props) {
     Linking.openURL(props.url);
   };
 
-
-  async function descricao() {
-    let req = await fetch(config.urlRootNode + "curso", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        desc: descricao,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => setDescricao(data.cursos)); //onde setaria a descrição do curso clicado
-  }
+  const minhaDescricao = () => {
+    //<DescricaoCurso /> -> componente
+  };
   
   return (
     <View style={styles.Container}>
@@ -39,8 +27,8 @@ export default function AcessoSecao(props) {
       </View>
       <Text style={styles.titulo}>{props.titulo}</Text>
       <View style={styles.containerBtns}>
-        <TouchableOpacity> 
-          <Icons name="info-circle" size={35} color="orange" onPress={descricao} />
+        <TouchableOpacity onPress={minhaDescricao}> 
+          <Icons name="info-circle" size={35} color="orange"/>
         </TouchableOpacity>
         <TouchableOpacity onPress={handlePress} >
           <Icons name="arrow-right" size={35} color="orange"  />
