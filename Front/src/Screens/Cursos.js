@@ -14,7 +14,7 @@ export default function Cursos() {
   const [allCourses, setAllCourses] = useState(fetch(config.urlRootNode + "cursos")
   .then((res) => res.json())
     .then((json) =>{
-    json.cursos}));
+    setAllCourses(json.cursos)}));
   const [filtro, setFiltro] = useState("");
 
   async function busca() {
