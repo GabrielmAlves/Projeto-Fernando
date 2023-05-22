@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View, Linking, Button } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, Linking, Button, Modal} from "react-native";
 import Icons from "react-native-vector-icons/FontAwesome";
 import { Image } from "react-native";
 import styles from "./style";
@@ -11,7 +11,7 @@ import styles from "./style";
 export default function Descricao(props) {
 
   const [descricao, setDescricao] = useState("");
-
+  const [visivel,setVisivel] = useState(false);
 
   async function description() {
     let req = await fetch(config.urlRootNode + "curso", {
@@ -30,10 +30,18 @@ export default function Descricao(props) {
   
   return (
     <View style={styles.modalContainer}>
-      <View>
-        <Text style={styles.textoModal}>Clique no botão para ver a descrição!</Text>
-        <Button style={styles.botaoModal} onPress={description}>Ver</Button>
-      </View>
+      <Modal 
+        animationType="slide"
+        transparent={true}
+        visible={true}
+        style={{}}>
+        <View>
+             {/* texto da descricao */}
+            {/* //<Text style={styles.textoModal}>Clique no botão para ver a descrição!</Text> */}
+            {/* <Button style={styles.botaoModal} onPress={description}>Ver</Button> */}
+            <Button style={styles.botaoModal} onPress={setVisivel(false)}>Fechar</Button>
+        </View>
+      </Modal>
     
     </View>
   );
