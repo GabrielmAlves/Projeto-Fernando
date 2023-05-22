@@ -22,6 +22,8 @@ export default function App() {
   const [hidePassword, setHidePassoword] = useState(true);
   const [data, setData] = useState(null);
 
+
+
   async function loginUser() {
     let req = await fetch(config.urlRootNode + "login", {
       method: "POST",
@@ -39,6 +41,8 @@ export default function App() {
   }
 
   if (data) {
+    setEmail("");
+    setSenha("");
     setData(null);
     navigation.dispatch(
       CommonActions.navigate({
@@ -54,6 +58,7 @@ export default function App() {
         <TextInput
           style={styles.formInput}
           placeholder="Preencha este campo com o seu e-mail"
+          value={email}
           onChangeText={(text) => setEmail(text)}
         />
         <Text style={styles.formLabel}>Senha</Text>
@@ -61,6 +66,7 @@ export default function App() {
           <TextInput
             style={styles.formPassword}
             placeholder="Preencha este campo com a sua senha"
+            value={senha}
             onChangeText={(text) => setSenha(text)}
             secureTextEntry={hidePassword}
           />
