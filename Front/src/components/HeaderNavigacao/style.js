@@ -10,4 +10,13 @@ export default styles = StyleSheet.create({
   btnNav: {
     padding: 8,
   },
+  dropdownMenu:{
+    backgroundColor:"#EEE",
+    position:"absolute",
+    top:55,
+    right:30,
+    width: 150,
+    borderRadius:10,
+    padding:15,
+   }
 });

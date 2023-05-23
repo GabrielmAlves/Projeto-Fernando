@@ -18,6 +18,7 @@ export default function App() {
   const [cursos, setCursos] = useState("");
   const [cargos, setCargos] = useState("");
   const [data, setData] = useState(null);
+  const [editField,setEditField] = useState(false);  
 
   useEffect(() => {
     fetch(config.urlRootNode + "curriculo")
@@ -44,6 +45,7 @@ export default function App() {
   };
 
   async function createCV() {
+    
     let req = await fetch(config.urlRootNode + "create", {
       method: "POST",
       headers: {
@@ -88,6 +90,7 @@ export default function App() {
           placeholder="Digite o nome da sua instituição de ensino"
           onChangeText={setInstituicao}
           value={instituicao}
+          editable={editField}
         />
       </View>
 
@@ -98,6 +101,8 @@ export default function App() {
           placeholder="Digite o nome das empresas em que trabalhou"
           onChangeText={setEmpresas}
           value={empresas}
+          editable={editField}
+
         />
       </View>
 
@@ -108,6 +113,8 @@ export default function App() {
           placeholder="Digite o nome dos cursos extras que fez"
           onChangeText={setCursos}
           value={cursos}
+          editable={editField}
+
         />
       </View>
 
@@ -118,11 +125,16 @@ export default function App() {
           placeholder="Digite os cargos que ocupou"
           onChangeText={setCargos}
           value={cargos}
+          editable={editField}
+
         />
       </View>
 
       <View style={styles.viewButtons}>
-        <TouchableOpacity style={styles.update} onPress={createCV}>
+        <TouchableOpacity style={styles.update} onPress={()=>{ 
+          setEditField(true)
+          createCV}
+          }>
           <Text style={styles.textUpdate}>Atualizar</Text>
         </TouchableOpacity>
 

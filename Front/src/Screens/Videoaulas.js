@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TextInput, TouchableOpacity,ScrollView } from "react-native";
 import AvisoSemConteudo from "../components/SemConteudo";
 import HeaderNavigacao from "../components/HeaderNavigacao"; 
 import AcessoSecao from "../components/AcessarSecao";
@@ -12,7 +12,7 @@ export default function Videoaulas() {
   const [allVideoaulas, setAllVideoaulas] = useState(fetch(config.urlRootNode + "videoaulas")
   .then((res) => res.json())
    .then((json) =>{
-   json.videoaulas}));
+   setAllVideoaulas(json.videoaulas)}));
   const [filtro, setFiltro] = useState("");
 
 
@@ -45,16 +45,20 @@ export default function Videoaulas() {
           <Icons name="search" size={25} color="orange"/>
           </TouchableOpacity>
         </View>
-
-       {
+        
+        {
          allVideoaulas.length > 0 ? (
+          <ScrollView style={styles.scroll}>
            <View style={styles.contentArea}> 
          {   allVideoaulas.map(item => (
                <AcessoSecao titulo={item.titulo} url={item.url} logo={item.logo}/>
            ))}
        </View>
+       </ScrollView>
        )   :   <AvisoSemConteudo text="videoaulas" />
        }
+  
+    
      </View>
    );
 }
@@ -66,5 +70,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
     marginTop: 30,
+  }, contentArea: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    width: "95%",
+    flexWrap: "wrap",
+  
   },
+  scroll:{
+    width:"100%",
+    marginLeft:15
+  }
 });

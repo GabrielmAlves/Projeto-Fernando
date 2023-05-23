@@ -11,6 +11,7 @@ export default styles = StyleSheet.create({
         marginBottom: 5,
         paddingLeft: 5,
         alignItems: "center",
+        
       },
       formFilter: {
         width: "88%",

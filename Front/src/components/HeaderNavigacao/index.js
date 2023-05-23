@@ -33,7 +33,7 @@ export default function HeaderNavigacao(props) {
           size={35}
           color="orange"
         />
-        {dropdownOpen && (
+        {dropdownOpen && ( 
           <View style={styles.dropdownMenu}>
             <TouchableOpacity onPress={() => navigation.navigate("Login")}>
               <Text>Alterar Senha</Text>

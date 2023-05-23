@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TextInput, TouchableOpacity,ScrollView } from "react-native";
 import AvisoSemConteudo from "../components/SemConteudo";
 import HeaderNavigacao from "../components/HeaderNavigacao"; 
 import AcessoSecao from "../components/AcessarSecao";
@@ -44,16 +44,19 @@ async function busca() {
           <Icons name="search" size={25} color="orange"/>
           </TouchableOpacity>
         </View>
-
-      {
+        
+        {
         allEvents.length > 0 ? (
+          <ScrollView style={styles.scroll}>
           <View style={styles.contentArea}> 
         {   allEvents.map(item => (
               <AcessoSecao titulo={item.titulo} url={item.url} logo={item.logo}/>
           ))}
-      </View>
+      </View> </ScrollView>
       )   :   <AvisoSemConteudo text="eventos" />
       }
+ 
+     
     </View>
   );
 }
@@ -66,4 +69,15 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     marginTop: 30,
   },
+  contentArea: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    width: "95%",
+    flexWrap: "wrap",
+  
+  },
+  scroll:{
+    width:"100%",
+    marginLeft:15
+  }
 });

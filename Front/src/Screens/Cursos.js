@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, Text, View, TextInput, TouchableOpacity } from "react-native";
+import { FlatList, StyleSheet, Text, View, TextInput, TouchableOpacity,ScrollView } from "react-native";
 import AvisoSemConteudo from "../components/SemConteudo";
 import HeaderNavigacao from "../components/HeaderNavigacao";
 import AcessoSecao from "../components/AcessarSecao";
@@ -45,18 +45,23 @@ export default function Cursos() {
           <Icons name="search" size={25} color="orange"/>
           </TouchableOpacity>
         </View>
-      {
-   
-          allCourses.length > 0 ? (
-            <View style={styles.contentArea}> 
-          {   allCourses.map(item => (
-                <AcessoSecao titulo={item.titulo} url={item.url} logo={item.logo}/>
-            ))}
-        </View>
-        )   :   <AvisoSemConteudo text="cursos" />
-      
         
-      }
+        {
+   
+   allCourses.length > 0 ? (
+    <ScrollView style={styles.scroll}>
+     <View style={styles.contentArea}> 
+   {   allCourses.map(item => (
+         <AcessoSecao titulo={item.titulo} url={item.url} logo={item.logo}/>
+     ))}
+ </View>
+ </ScrollView>
+ )   :   <AvisoSemConteudo text="cursos" />
+
+ 
+}
+
+     
       
     </View>
   );
@@ -69,11 +74,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
     marginTop: 30,
+  
   },
   contentArea: {
     flexDirection: "row",
     justifyContent: "space-around",
     width: "95%",
     flexWrap: "wrap",
+  
   },
+  scroll:{
+    width:"100%",
+    marginLeft:15
+  }
 });
