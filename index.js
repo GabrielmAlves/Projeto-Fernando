@@ -140,7 +140,11 @@ app.get('/curso', async(req,res) => {
     con.query('SELECT * FROM curso WHERE id = ?',[req.body.idCurso], (err, rows) => {
         if (err) throw err
 
-        // TODO detalhes curso
+        if(rows[0] != undefined) {
+            res.json({cursos: rows[0]});
+        } else {
+            res.json({cursos: []});
+        }
     });
 });
 

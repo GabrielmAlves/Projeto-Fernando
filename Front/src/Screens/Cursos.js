@@ -51,7 +51,7 @@ export default function Cursos() {
         allCourses.length > 0 ? (
           <View style={styles.contentArea}> 
         {   allCourses.map(item => (
-              <AcessoSecao titulo={item.titulo} url={item.url} logo={item.logo}/>
+              <AcessoSecao titulo={item.titulo} url={item.url} logo={item.logo} id={item}/>
           ))}
       </View>
       )   :   <AvisoSemConteudo text="cursos" />
