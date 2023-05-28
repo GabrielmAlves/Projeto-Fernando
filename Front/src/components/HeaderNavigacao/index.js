@@ -22,9 +22,8 @@ export default function HeaderNavigacao(props) {
           size={35}
           color="orange"
         />
-      </TouchableOpacity>
+      </TouchableOpacity> 
       <TouchableOpacity
-      onPress={() => setDropdownOpen(!dropdownOpen)}
       style={styles.btnNav}
       >
         <Icons
@@ -33,18 +32,7 @@ export default function HeaderNavigacao(props) {
           size={35}
           color="orange"
         />
-        {dropdownOpen && ( 
-          <View style={styles.dropdownMenu}>
-            <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-              <Text>Alterar Senha</Text>
-            </TouchableOpacity>
-            
-            <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-            <Icons name="sign-out" size={35} color="orange"/><Text>Sair</Text>
-            </TouchableOpacity>
-            
-          </View>
-        )}
+        
       </TouchableOpacity>
     </View>
   );

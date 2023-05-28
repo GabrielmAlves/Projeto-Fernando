@@ -14,10 +14,9 @@ export default function(){
         <View style={styles.modalContainer}>
 
             <Modal 
-            animationType="slide"
             transparent={true}
             visible={true}
-            style={{}}>
+           >
 
              <View>
                 <Text style={styles.textoModalSalvar}>Currículo salvo!</Text>

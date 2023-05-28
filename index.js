@@ -44,16 +44,16 @@ app.post('/login', async(req,res) => {
             if(senhaBD == senhaHash) {
                 console.log('Entrou ');
                 idUser = rows[0].id;
-                res.json({login: true});
+                res.json({login: 0});
             }
             else {
                 console.log('Senha incorreta');
-                res.json({login: false});
+                res.json({login: 1});
             }    
         }
         else {
             console.log('Este usuário não existe');
-            res.json({login: false});
+            res.json({login: 2});
         }   
     })
 });
@@ -111,7 +111,7 @@ app.post('/create', async(req,res) => {
     });    
 });
 
-app.post('/delete', async(req,res) => {
+app.get('/delete', async(req,res) => {
 
     con.query('DELETE FROM curriculo WHERE associado_id = ?',idUser, (err, rows) => {
         if (err) throw err
