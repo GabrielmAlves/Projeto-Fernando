@@ -12,6 +12,7 @@ import Jogos from "./src/Screens/Jogos";
 import Vagas from "./src/Screens/Vagas";
 import VideoAulas from "./src/Screens/Videoaulas";
 import EsqueciSenha from "./src/Screens/EsqueciSenha";
+import Detalhes from "./src/Screens/Detalhes";
 
 const stack = createNativeStackNavigator();
 
@@ -61,6 +62,11 @@ function MyStack() {
       <stack.Screen
         name="VideoAulas"
         component={VideoAulas}
+        options={{ headerShown: false }}
+      />
+       <stack.Screen
+        name="Detalhes"
+        component={Detalhes}
         options={{ headerShown: false }}
       />
     </stack.Navigator>

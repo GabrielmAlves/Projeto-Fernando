@@ -45,14 +45,13 @@ export default function Cursos() {
           <Icons name="search" size={25} color="orange"/>
           </TouchableOpacity>
         </View>
-        
         {
    
    allCourses.length > 0 ? (
     <ScrollView style={styles.scroll}>
      <View style={styles.contentArea}> 
    {   allCourses.map(item => (
-         <AcessoSecao titulo={item.titulo} url={item.url} logo={item.logo}/>
+         <AcessoSecao titulo={item.titulo} url={item.url} descricao={item.descricao} dataExp={item.data_exp} back="Cursos"/>
      ))}
  </View>
  </ScrollView>
