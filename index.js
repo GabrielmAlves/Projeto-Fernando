@@ -277,21 +277,21 @@ app.post('/alteraSenha', async(req,res) => {
             if(senhaBD == senhaHash) {
                 console.log('Pode alterar senha');
                 let novaSenha = sha256(req.body.novaSenhaUser);
-                if(senhaBD == novaSenha) {
-                    console.log('Nova senha não pode ser igual a atual');
-                    res.json({alteraSenha: false});
-                } else {
+
+                con.query('UPDATE associado SET senha_hash = ? where id = ?', [novaSenha,idUser], (err, rows) => {
+                    if (err) throw err
+
                     console.log('Senha alterada com sucesso');
-                    res.json({alteraSenha: true});
-                }
+                    res.json({alteraSenha: 0});
+                });
+                
             } else {
                 console.log('Senha incorreta');
-                res.json({alteraSenha: false});
+                res.json({alteraSenha: 1});
             }    
-        }
-        else {
+        } else {
             console.log('Este usuário não existe');
-            res.json({alteraSenha: false});
+            res.json({alteraSenha: 1});
         }   
     })
 });

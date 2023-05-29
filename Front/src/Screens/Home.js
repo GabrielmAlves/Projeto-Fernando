@@ -13,24 +13,25 @@ export default function App() {
     <View style={styles.container}>
         <View style={stylesNavigation.navigationContainer}>
       <TouchableOpacity
-        onPress={() => {
-          navigation.navigate("Login");
-        }}
+      
       >
         <Icons
-          style={stylesNavigation.btnNav}
+          style={styles.btnNavArrow}
           name="chevron-left"
           size={35}
           color="orange"
         />
       </TouchableOpacity> 
       <TouchableOpacity
-      style={stylesNavigation.btnNav}
+        onPress={() => {
+          navigation.navigate("Login");
+        }}
+      style={styles.btnNav}
       
       >
         <Icons
           style={stylesNavigation.btnNav}
-          name="user-circle"
+          name="sign-out"
           size={35}
           color="orange"
           
@@ -57,6 +58,11 @@ export default function App() {
           icon="laptop"
           screen="VideoAulas"
         ></ButtonHome>
+         <ButtonHome
+          text="Alterar Senha"
+          icon="key"
+          screen="AlterarSenha"
+        ></ButtonHome>
       </ScrollView>
      {/* <Modal/> */}
 
@@ -73,4 +79,10 @@ const styles = StyleSheet.create({
     marginTop: 30,
     backgroundColor: "#FFF",
   },
+  btnNavArrow:{
+    display:"none"
+  },
+  btnNav:{
+    padding:8
+  }
 });

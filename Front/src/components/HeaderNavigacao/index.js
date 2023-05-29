@@ -27,7 +27,7 @@ export default function HeaderNavigacao(props) {
       style={styles.btnNav}
       >
         <Icons
-          style={styles.btnNav}
+          style={styles.btnNavUser}
           name="user-circle"
           size={35}
           color="orange"

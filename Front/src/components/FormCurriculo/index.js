@@ -77,6 +77,9 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+
+      <Text style={styles.Title}>Currículo</Text>
+
       <View>
         <Text style={styles.label}>Instituição de Ensino</Text>
         <TextInput
@@ -125,12 +128,7 @@ export default function App() {
       </View>
 
       <View style={styles.viewButtons}>
-        <TouchableOpacity style={styles.update} onPress={()=>{ 
-          setEditField(true)
-          createCV}
-          }>
-          <Text style={styles.textUpdate}>Atualizar</Text>
-        </TouchableOpacity>
+       
 
         <TouchableOpacity style={styles.delete} onPress={handlePressDelete}>
           <Text style={styles.textDelete}>Deletar</Text>
@@ -140,9 +138,7 @@ export default function App() {
         <TouchableOpacity style={styles.save} onPress={handlePressSave}>
           <Text style={styles.textSave}>Salvar</Text>
         </TouchableOpacity>
-        {/* <TouchableOpacity style={styles.save} onPress={createCV}>
-          <Text style={styles.textSave}>Salvar</Text>
-        </TouchableOpacity> */}
+    
       </View>
     </View>
   );

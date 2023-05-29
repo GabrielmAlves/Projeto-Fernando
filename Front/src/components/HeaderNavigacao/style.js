@@ -9,6 +9,10 @@ export default styles = StyleSheet.create({
   },
   btnNav: {
     padding: 8,
+    
+  },
+  btnNavUser: {
+    display:"none"
   },
  
 });
