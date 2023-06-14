@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, ScrollView } from "react-native";
 import AvisoSemConteudo from "../components/SemConteudo";
 import HeaderNavigacao from "../components/HeaderNavigacao";
 import AcessoSecao from "../components/AcessarSecao";
@@ -10,14 +10,14 @@ import Icons from "react-native-vector-icons/FontAwesome";
 
 export default function Jogos() {
 
-  const [allJogos, setAllJogos] = useState([]);
+  const [allJogos, setAllJogos] = useState( fetch(config.urlRootNode + "jogos")
+  .then((res) => res.json())
+   .then((json) =>{
+    setAllJogos(json.jogos)}) );
   const [filtro, setFiltro] = useState("");
 
   useEffect(() => {
-    fetch(config.urlRootNode + "jogos")
-     .then((res) => res.json())
-      .then((json) =>{
-        setAllJogos(json.jogos)}) 
+   
    
  }, []);
 
@@ -49,16 +49,19 @@ export default function Jogos() {
           <Icons name="search" size={25} color="orange"/>
           </TouchableOpacity>
         </View>
-
-       {
+       
+{
          allJogos.length > 0 ? (
+          <ScrollView style={styles.scroll}>
            <View style={styles.contentArea}> 
          {   allJogos.map(item => (
-               <AcessoSecao titulo={item.titulo} url={item.url} logo={item.logo}/>
+                <AcessoSecao titulo={item.titulo} url={item.url} descricao={item.descricao} dataExp={item.data_exp} back="Jogos" img={item.logo}/>
            ))}
-       </View>
+       </View></ScrollView>
        )   :   <AvisoSemConteudo text="jogos" />
        }
+
+      
      </View>
    );
 }
@@ -71,4 +74,15 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     marginTop: 30,
   },
+  contentArea: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    width: "95%",
+    flexWrap: "wrap",
+  
+  },
+  scroll:{
+    width:"100%",
+    marginLeft:15
+  }
 });

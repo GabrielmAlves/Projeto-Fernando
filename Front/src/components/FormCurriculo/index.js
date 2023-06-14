@@ -9,6 +9,9 @@ import {
 import React, { useState, useEffect } from "react";
 import config from "../../../config/config.json";
 import styles from "./style";
+import Modal from 'react-native-modal';
+import ModalSalvar from "../ModalSalvar";
+import { useNavigation } from "@react-navigation/native";
 
 export default function App() {
   const [instituicao, setInstituicao] = useState("");
@@ -16,6 +19,8 @@ export default function App() {
   const [cursos, setCursos] = useState("");
   const [cargos, setCargos] = useState("");
   const [data, setData] = useState(null);
+  const [editField,setEditField] = useState(false); 
+  const navigation = useNavigation(); 
 
   useEffect(() => {
     fetch(config.urlRootNode + "curriculo")
@@ -31,6 +36,24 @@ export default function App() {
       .then((res) => res.json())
       .then((json) => setCargos(json.cargos));
   }, []);
+
+  const handlePressSave = ()=>{
+    if(instituicao == "" && empresas == "" && cursos == "" && cargos == "") {
+      alert("Não é possível salvar um currículo vazio")
+    } else {
+      createCV();
+      alert("Currículo Salvo!");
+    }
+  };
+
+  const handlePressDelete = ()=>{
+    eraseCV();
+    setInstituicao("");
+    setCargos("");
+    setCursos("");
+    setEmpresas("");
+    alert("Currículo Apagado!");
+  };
 
   async function createCV() {
     let req = await fetch(config.urlRootNode + "create", {
@@ -49,27 +72,14 @@ export default function App() {
   }
 
   async function eraseCV() {
-    let req = await fetch(config.urlRootNode + "delete", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        instituicaoUser: instituicao,
-        empresasUser: empresas,
-        cursosUser: cursos,
-        cargosUser: cargos,
-      }),
-    });
-    setInstituicao("");
-    setCargos("");
-    setCursos("");
-    setEmpresas("");
+    fetch(config.urlRootNode + "delete");
   }
 
   return (
     <View style={styles.container}>
+
+      <Text style={styles.Title}>Currículo</Text>
+
       <View>
         <Text style={styles.label}>Instituição de Ensino</Text>
         <TextInput
@@ -77,6 +87,7 @@ export default function App() {
           placeholder="Digite o nome da sua instituição de ensino"
           onChangeText={setInstituicao}
           value={instituicao}
+          editable={editField}
         />
       </View>
 
@@ -87,6 +98,8 @@ export default function App() {
           placeholder="Digite o nome das empresas em que trabalhou"
           onChangeText={setEmpresas}
           value={empresas}
+          editable={editField}
+
         />
       </View>
 
@@ -97,6 +110,8 @@ export default function App() {
           placeholder="Digite o nome dos cursos extras que fez"
           onChangeText={setCursos}
           value={cursos}
+          editable={editField}
+
         />
       </View>
 
@@ -107,21 +122,23 @@ export default function App() {
           placeholder="Digite os cargos que ocupou"
           onChangeText={setCargos}
           value={cargos}
+          editable={editField}
+
         />
       </View>
 
       <View style={styles.viewButtons}>
-        <TouchableOpacity style={styles.update} onPress={createCV}>
-          <Text style={styles.textUpdate}>Atualizar</Text>
-        </TouchableOpacity>
+       
 
-        <TouchableOpacity style={styles.delete} onPress={eraseCV}>
+        <TouchableOpacity style={styles.delete} onPress={handlePressDelete}>
           <Text style={styles.textDelete}>Deletar</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.save} onPress={createCV}>
+
+        <TouchableOpacity style={styles.save} onPress={handlePressSave}>
           <Text style={styles.textSave}>Salvar</Text>
         </TouchableOpacity>
+    
       </View>
     </View>
   );

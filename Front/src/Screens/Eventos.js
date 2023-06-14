@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TextInput, TouchableOpacity,ScrollView } from "react-native";
 import AvisoSemConteudo from "../components/SemConteudo";
 import HeaderNavigacao from "../components/HeaderNavigacao"; 
 import AcessoSecao from "../components/AcessarSecao";
@@ -9,16 +9,12 @@ import Icons from "react-native-vector-icons/FontAwesome";
 
 
 export default function Eventos() {
-  const [allEvents, setAllEvents] = useState([]);
+  const [allEvents, setAllEvents] = useState(fetch(config.urlRootNode + "eventos")
+  .then((res) => res.json())
+   .then((json) =>{
+  json.eventos}) );
   const [filtro, setFiltro] = useState("");
 
-  useEffect(() => {
-   fetch(config.urlRootNode + "eventos")
-    .then((res) => res.json())
-     .then((json) =>{
-     setAllEvents(json.eventos)}) 
-  
-}, []);
 
 async function busca() {
   let req = await fetch(config.urlRootNode + "buscaEvento", {
@@ -48,16 +44,19 @@ async function busca() {
           <Icons name="search" size={25} color="orange"/>
           </TouchableOpacity>
         </View>
-
-      {
+        
+        {
         allEvents.length > 0 ? (
+          <ScrollView style={styles.scroll}>
           <View style={styles.contentArea}> 
         {   allEvents.map(item => (
-              <AcessoSecao titulo={item.titulo} url={item.url} logo={item.logo}/>
-          ))}
-      </View>
+         <AcessoSecao titulo={item.titulo} url={item.url} descricao={item.descricao} dataExp={item.data_exp} back="Eventos" img={item.logo}/>
+         ))}
+      </View> </ScrollView>
       )   :   <AvisoSemConteudo text="eventos" />
       }
+ 
+     
     </View>
   );
 }
@@ -70,4 +69,15 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     marginTop: 30,
   },
+  contentArea: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    width: "95%",
+    flexWrap: "wrap",
+  
+  },
+  scroll:{
+    width:"100%",
+    marginLeft:15
+  }
 });

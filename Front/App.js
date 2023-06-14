@@ -12,7 +12,8 @@ import Jogos from "./src/Screens/Jogos";
 import Vagas from "./src/Screens/Vagas";
 import VideoAulas from "./src/Screens/Videoaulas";
 import EsqueciSenha from "./src/Screens/EsqueciSenha";
-
+import Detalhes from "./src/Screens/Detalhes";
+import AlterarSenha from "./src/Screens/AlterarSenha";
 const stack = createNativeStackNavigator();
 
 function MyStack() {
@@ -63,6 +64,19 @@ function MyStack() {
         component={VideoAulas}
         options={{ headerShown: false }}
       />
+       <stack.Screen
+        name="Detalhes"
+        component={Detalhes}
+        options={{ headerShown: false }}
+      />
+      <stack.Screen
+        name="AlterarSenha"
+        component={AlterarSenha}
+        options={{ headerShown: false }}
+      />
+
+
+
     </stack.Navigator>
   );
 }

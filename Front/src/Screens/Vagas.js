@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TextInput, TouchableOpacity,ScrollView } from "react-native";
 import AvisoSemConteudo from "../components/SemConteudo";
 import HeaderNavigacao from "../components/HeaderNavigacao"; 
 import AcessoSecao from "../components/AcessarSecao";
@@ -9,16 +9,13 @@ import Icons from "react-native-vector-icons/FontAwesome";
 
 
 export default function Vagas() {
-  const [allVagas, setAllVagas] = useState([]);
+  const [allVagas, setAllVagas] = useState(fetch(config.urlRootNode + "vagas")
+  .then((res) => res.json())
+   .then((json) =>{
+     setAllVagas(json.vagas)}));
   const [filtro, setFiltro] = useState("");
 
-  useEffect(() => {
-    fetch(config.urlRootNode + "vagas")
-     .then((res) => res.json())
-      .then((json) =>{
-        setAllVagas(json.vagas)})
-    
- }, []);
+
 
  async function busca() {
   let req = await fetch(config.urlRootNode + "buscaVaga", {
@@ -48,16 +45,19 @@ export default function Vagas() {
           <Icons name="search" size={25} color="orange"/>
           </TouchableOpacity>
         </View>
-
-       {
+        
+        {
          allVagas.length > 0 ? (
+          <ScrollView style={styles.scroll}>
            <View style={styles.contentArea}> 
          {   allVagas.map(item => (
-               <AcessoSecao titulo={item.titulo} url={item.url} logo={item.logo}/>
+                <AcessoSecao titulo={item.titulo} url={item.url} descricao={item.descricao} dataExp={item.data_exp}  back="Vagas" img={item.logo}/>
            ))}
-       </View>
+       </View></ScrollView>
        )   :   <AvisoSemConteudo text="vagas" />
        }
+  
+   
      </View>
    );
 }
@@ -70,4 +70,15 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     marginTop: 30,
   },
+   contentArea: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    width: "95%",
+    flexWrap: "wrap",
+  
+  },
+  scroll:{
+    width:"100%",
+    marginLeft:15
+  }
 });

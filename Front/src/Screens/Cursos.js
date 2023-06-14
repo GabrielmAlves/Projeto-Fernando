@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, Text, View, TextInput, TouchableOpacity } from "react-native";
+import { FlatList, StyleSheet, Text, View, TextInput, TouchableOpacity,ScrollView } from "react-native";
 import AvisoSemConteudo from "../components/SemConteudo";
 import HeaderNavigacao from "../components/HeaderNavigacao";
 import AcessoSecao from "../components/AcessarSecao";
@@ -7,17 +7,15 @@ import { useEffect, useState } from "react";
 import config from "../../config/config.json";
 import stylesFilter from "../components/InputDeFiltro/style"
 
+
+
 export default function Cursos() {
   
-  const [allCourses, setAllCourses] = useState([]);
+  const [allCourses, setAllCourses] = useState(fetch(config.urlRootNode + "cursos")
+  .then((res) => res.json())
+    .then((json) =>{
+    setAllCourses(json.cursos)}));
   const [filtro, setFiltro] = useState("");
-
-  useEffect(() => {
-    fetch(config.urlRootNode + "cursos")
-    .then((res) => res.json())
-      .then((json) =>{
-      setAllCourses(json.cursos)})
-  }, []);
 
   async function busca() {
     let req = await fetch(config.urlRootNode + "buscaCurso", {
@@ -47,15 +45,22 @@ export default function Cursos() {
           <Icons name="search" size={25} color="orange"/>
           </TouchableOpacity>
         </View>
-      {
-        allCourses.length > 0 ? (
-          <View style={styles.contentArea}> 
-        {   allCourses.map(item => (
-              <AcessoSecao titulo={item.titulo} url={item.url} logo={item.logo}/>
-          ))}
-      </View>
-      )   :   <AvisoSemConteudo text="cursos" />
-      }
+        {
+   
+   allCourses.length > 0 ? (
+    <ScrollView style={styles.scroll}>
+     <View style={styles.contentArea}> 
+   {   allCourses.map(item => (
+         <AcessoSecao titulo={item.titulo} url={item.url} descricao={item.descricao} dataExp={item.data_exp} back="Cursos" img={item.logo}/>
+     ))}
+ </View>
+ </ScrollView>
+ )   :   <AvisoSemConteudo text="cursos" />
+
+ 
+}
+
+     
       
     </View>
   );
@@ -68,11 +73,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
     marginTop: 30,
+  
   },
   contentArea: {
     flexDirection: "row",
     justifyContent: "space-around",
     width: "95%",
     flexWrap: "wrap",
+  
   },
+  scroll:{
+    width:"100%",
+    marginLeft:15
+  }
 });

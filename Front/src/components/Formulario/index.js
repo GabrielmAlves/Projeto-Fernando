@@ -22,6 +22,10 @@ export default function App() {
   const [hidePassword, setHidePassoword] = useState(true);
   const [data, setData] = useState(null);
 
+  const handlePressLogin = ()=>{
+    loginUser();
+  };
+
   async function loginUser() {
     let req = await fetch(config.urlRootNode + "login", {
       method: "POST",
@@ -38,13 +42,21 @@ export default function App() {
       .then((data) => setData(data.login));
   }
 
-  if (data) {
+  if (data == 0) {
+    setEmail("");
+    setSenha("");
     setData(null);
     navigation.dispatch(
       CommonActions.navigate({
         name: "Home",
       })
     );
+  } else if(data == 1) {
+    setData(null);
+    alert("Senha incorreta!");
+  } else if(data == 2) {
+    setData(null);
+    alert("Esse email não foi cadastrado!");
   }
 
   return (
@@ -54,6 +66,7 @@ export default function App() {
         <TextInput
           style={styles.formInput}
           placeholder="Preencha este campo com o seu e-mail"
+          value={email}
           onChangeText={(text) => setEmail(text)}
         />
         <Text style={styles.formLabel}>Senha</Text>
@@ -61,6 +74,7 @@ export default function App() {
           <TextInput
             style={styles.formPassword}
             placeholder="Preencha este campo com a sua senha"
+            value={senha}
             onChangeText={(text) => setSenha(text)}
             secureTextEntry={hidePassword}
           />
@@ -90,7 +104,7 @@ export default function App() {
           {/* <Forget /> */}
           <ButtonEsqueciSenha screen="EsqueciSenha"></ButtonEsqueciSenha>
         </View>
-        <Button title="Entrar" color="#FFA500" onPress={loginUser} />
+        <Button title="Entrar" color="#FFA500" onPress={handlePressLogin} />
       </View>
     </View>
   );
