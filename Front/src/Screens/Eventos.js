@@ -50,7 +50,7 @@ async function busca() {
           <ScrollView style={styles.scroll}>
           <View style={styles.contentArea}> 
         {   allEvents.map(item => (
-         <AcessoSecao titulo={item.titulo} url={item.url} descricao={item.descricao} dataExp={item.data_exp} back="Eventos"/>
+         <AcessoSecao titulo={item.titulo} url={item.url} descricao={item.descricao} dataExp={item.data_exp} back="Eventos" img={item.logo}/>
          ))}
       </View> </ScrollView>
       )   :   <AvisoSemConteudo text="eventos" />

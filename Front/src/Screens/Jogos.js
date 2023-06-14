@@ -55,7 +55,7 @@ export default function Jogos() {
           <ScrollView style={styles.scroll}>
            <View style={styles.contentArea}> 
          {   allJogos.map(item => (
-                <AcessoSecao titulo={item.titulo} url={item.url} descricao={item.descricao} dataExp={item.data_exp} back="Jogos" />
+                <AcessoSecao titulo={item.titulo} url={item.url} descricao={item.descricao} dataExp={item.data_exp} back="Jogos" img={item.logo}/>
            ))}
        </View></ScrollView>
        )   :   <AvisoSemConteudo text="jogos" />

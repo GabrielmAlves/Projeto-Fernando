@@ -51,7 +51,7 @@ export default function Videoaulas() {
           <ScrollView style={styles.scroll}>
            <View style={styles.contentArea}> 
          {   allVideoaulas.map(item => (
-              <AcessoSecao titulo={item.titulo} url={item.url} descricao={item.descricao} dataExp={item.data_exp}  back="VideoAulas"/>
+              <AcessoSecao titulo={item.titulo} url={item.url} descricao={item.descricao} dataExp={item.data_exp}  back="VideoAulas" img={item.logo}/>
            ))}
        </View>
        </ScrollView>

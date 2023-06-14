@@ -51,7 +51,7 @@ export default function Vagas() {
           <ScrollView style={styles.scroll}>
            <View style={styles.contentArea}> 
          {   allVagas.map(item => (
-                <AcessoSecao titulo={item.titulo} url={item.url} descricao={item.descricao} dataExp={item.data_exp}  back="Vagas" />
+                <AcessoSecao titulo={item.titulo} url={item.url} descricao={item.descricao} dataExp={item.data_exp}  back="Vagas" img={item.logo}/>
            ))}
        </View></ScrollView>
        )   :   <AvisoSemConteudo text="vagas" />

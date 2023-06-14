@@ -7,6 +7,8 @@ import HeaderNavigacao from "../components/HeaderNavigacao";
 import style from "../components/SemConteudo/style";
 
 export default function Detalhes(props) {
+  
+  const base64Image = 'data:image/jpeg;base64,' + props.route.params.img
 
   const handlePress = () => {
     Linking.openURL(props.route.params.url);
@@ -16,7 +18,7 @@ export default function Detalhes(props) {
     <View style={styles.container}>
       
     <HeaderNavigacao back={props.route.params.back}></HeaderNavigacao>
-    <Image style={styles.imagemDetalhes} source={require("../../assets/x.jpeg")} />
+    <Image style={styles.imagemDetalhes} source={{uri:base64Image}} />
     <Text style={styles.textoDetalhes}>{props.route.params.titulo}</Text>
     <Text style={styles.textoDetalhes}>{props.route.params.descricao}</Text>
 

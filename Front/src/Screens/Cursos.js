@@ -51,7 +51,7 @@ export default function Cursos() {
     <ScrollView style={styles.scroll}>
      <View style={styles.contentArea}> 
    {   allCourses.map(item => (
-         <AcessoSecao titulo={item.titulo} url={item.url} descricao={item.descricao} dataExp={item.data_exp} back="Cursos"/>
+         <AcessoSecao titulo={item.titulo} url={item.url} descricao={item.descricao} dataExp={item.data_exp} back="Cursos" img={item.logo}/>
      ))}
  </View>
  </ScrollView>

@@ -7,13 +7,13 @@ const sha256 = require('sha256'); //encriptar senha
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
+const fs = require('fs');
+
 app.use(cors());
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
 let port = process.env.port || 3000;
-
-// console.log(sha256('abc123'));
 
 const mysql = require('mysql');
 
@@ -23,6 +23,20 @@ const con = mysql.createConnection({
     password: '', // A senha do usuário. Ex: user123
     database: 'db_extcomp' // A base de dados a qual a aplicação irá se conectar, deve ser a mesma onde foi executado o Código 1. Ex: node_mysql
 });
+
+const assetsDir = './front/assets/logo/'
+const mediaDir = '../Vitalita Web/sistematrabalhista/src/media/'
+
+function base64_encode(file) {
+    // read binary data
+    var bitmap = fs.readFileSync(mediaDir+file);
+    // convert binary data to base64 encoded string
+    return new Buffer(bitmap).toString('base64');
+}
+
+function copiarArquivo(srcDir,destDir) {
+    fs.copyFileSync(mediaDir+srcDir,assetsDir+destDir);
+}
 
 con.connect((err) => {
     if (err) {
@@ -127,20 +141,21 @@ app.get('/cursos', async(req,res) => {
         if (err) throw err
 
         if(rows[0] != undefined) {
+
+            for(let i=0;true;i++){
+                if(rows[i]==undefined)
+                    break
+                else {
+                    rows[i].logo = base64_encode(rows[i].logo)
+                    // copiarArquivo(rows[i].logo,'curso/curso'+ rows[i].id + '.png');
+                }
+            }
+
             res.json({cursos: rows});
         } else {
             res.json({cursos: []});
         }
         
-    });
-});
-
-app.get('/curso', async(req,res) => {
-
-    con.query('SELECT * FROM curso WHERE id = ?',[req.body.idCurso], (err, rows) => {
-        if (err) throw err
-
-        // TODO detalhes curso
     });
 });
 
@@ -163,6 +178,16 @@ app.get('/eventos', async(req,res) => {
         if (err) throw err
 
         if(rows[0] != undefined) {
+
+            for(let i=0;true;i++){
+                if(rows[i]==undefined)
+                    break
+                else {
+                    rows[i].logo = base64_encode(rows[i].logo)
+                    // copiarArquivo(rows[i].logo,'evento/evento'+ rows[i].id + '.png');
+                }
+            }
+
             res.json({eventos: rows});
         } else {
             res.json({eventos: []});
@@ -192,6 +217,15 @@ app.get('/jogos', async(req,res) => {
         if (err) throw err
 
         if(rows[0] != undefined) {
+
+            for(let i=0;true;i++){
+                if(rows[i]==undefined)
+                    break
+                else {
+                    rows[i].logo = base64_encode(rows[i].logo)
+                    // copiarArquivo(rows[i].logo,'jogo/jogo'+ rows[i].id + '.png');
+                }
+            }
             res.json({jogos: rows});
         } else {
             res.json({jogos: []});
@@ -219,6 +253,16 @@ app.get('/videoaulas', async(req,res) => {
         if (err) throw err
 
         if(rows[0] != undefined) {
+
+            for(let i=0;true;i++){
+                if(rows[i]==undefined)
+                    break
+                else {
+                    rows[i].logo = base64_encode(rows[i].logo)
+                    // copiarArquivo(rows[i].logo,'videoaula/videoaula'+ rows[i].id + '.png');
+                }
+            }
+
             res.json({videoaulas: rows});
         } else {
             res.json({videoaulas: []});
@@ -246,6 +290,16 @@ app.get('/vagas', async(req,res) => {
         if (err) throw err
 
         if(rows[0] != undefined) {
+
+            for(let i=0;true;i++){
+                if(rows[i]==undefined)
+                    break
+                else {
+                    rows[i].logo = base64_encode(rows[i].logo)
+                    // copiarArquivo(rows[i].logo,'vaga/vaga'+ rows[i].id + '.png');
+                }
+            }
+
             res.json({vagas: rows});
         } else {
             res.json({vagas: []});
@@ -299,9 +353,6 @@ app.post('/alteraSenha', async(req,res) => {
 app.listen(port, (req,res) => {
     console.log('Servidor rodando');
 });
-
-
-
 
 // con.end((err) => {
 //     if(err) {
