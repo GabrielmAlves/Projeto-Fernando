@@ -6,10 +6,11 @@ export default styles = StyleSheet.create({
     borderRadius: 15,
     marginTop: 20,
     maxWidth: 147,
+    paddingHorizontal:10
   },
   img: {
-    width: 145,
-    height: 110,
+    width: 125,
+    height: 120,
     borderTopRightRadius: 15,
     borderTopLeftRadius: 15,
   },
