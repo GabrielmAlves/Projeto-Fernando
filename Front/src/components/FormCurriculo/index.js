@@ -19,7 +19,6 @@ export default function App() {
   const [cursos, setCursos] = useState("");
   const [cargos, setCargos] = useState("");
   const [data, setData] = useState(null);
-  const [editField,setEditField] = useState(false); 
   const navigation = useNavigation(); 
 
   useEffect(() => {
@@ -87,7 +86,6 @@ export default function App() {
           placeholder="Digite o nome da sua instituição de ensino"
           onChangeText={setInstituicao}
           value={instituicao}
-          editable={editField}
         />
       </View>
 
@@ -98,7 +96,6 @@ export default function App() {
           placeholder="Digite o nome das empresas em que trabalhou"
           onChangeText={setEmpresas}
           value={empresas}
-          editable={editField}
 
         />
       </View>
@@ -110,7 +107,6 @@ export default function App() {
           placeholder="Digite o nome dos cursos extras que fez"
           onChangeText={setCursos}
           value={cursos}
-          editable={editField}
 
         />
       </View>
@@ -122,7 +118,6 @@ export default function App() {
           placeholder="Digite os cargos que ocupou"
           onChangeText={setCargos}
           value={cargos}
-          editable={editField}
 
         />
       </View>

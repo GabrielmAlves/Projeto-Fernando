@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   
   imagemDetalhes: {
     height: "30%",
-    width: "100%", 
+    width: "58%", 
   },
 
   botaoDetalhes: {
